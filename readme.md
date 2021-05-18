@@ -1,5 +1,7 @@
 # eth-fun
 
+[![Node.js CI](https://github.com/rugpullindex/eth-fns/actions/workflows/node.js.yml/badge.svg)](https://github.com/rugpullindex/eth-fns/actions/workflows/node.js.yml)
+
 > A functional library of Ethereum utility functions.
 
 ## Installation
