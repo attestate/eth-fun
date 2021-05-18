@@ -1,5 +1,5 @@
 {
-  "name": "eth-fns",
+  "name": "eth-fun",
   "version": "0.0.1",
   "description": "A treeshake-ready, functional library of Ethereum utility functions",
   "main": "src/index.mjs",

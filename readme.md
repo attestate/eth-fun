@@ -1,11 +1,11 @@
-# eth-fns
+# eth-fun
 
 > A treeshake-ready, functional library of Ethereum utility functions.
 
 ## Installation
 
 ```bash
-$ npm i eth-fns
+$ npm i eth-fun
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ $ npm i eth-fns
 and returns all functions in the code as they appear in the generated ABI.
 
 ```js
-import { allFunctions } from "eth-fns";
+import { allFunctions } from "eth-fun";
 
 const code =
   "pragma solidity ^0.6.12;\n contract C { function f() public { } }";
