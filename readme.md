@@ -1,6 +1,6 @@
 # eth-fun
 
-> A treeshake-ready, functional library of Ethereum utility functions.
+> A functional library of Ethereum utility functions.
 
 ## Installation
 
