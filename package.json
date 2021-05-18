@@ -1,6 +1,6 @@
 {
   "name": "eth-fun",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A treeshake-ready, functional library of Ethereum utility functions",
   "main": "src/index.mjs",
   "scripts": {

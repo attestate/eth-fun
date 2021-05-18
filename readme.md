@@ -65,6 +65,13 @@ console.log(fns);
 
 ## Changelog
 
+### 0.1.0
+
+- Add `compile` function
+- (Breaking change) Separate `allFunctions` and `compile` function
+- (Breaking change) Change `allFunctions` function signature. Output now
+returns an object of named contracts with the list of functions.
+
 ### 0.0.1
 
 - Initial release
