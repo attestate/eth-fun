@@ -1,0 +1,23 @@
+{
+  "name": "eth-fns",
+  "version": "0.0.1",
+  "description": "A treeshake-ready, functional library of Ethereum utility functions",
+  "main": "src/index.mjs",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "utility",
+    "functional"
+  ],
+  "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "solc": "0.6.12"
+  },
+  "devDependencies": {
+    "ava": "3.15.0"
+  }
+}
