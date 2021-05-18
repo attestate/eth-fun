@@ -12,27 +12,55 @@ $ npm i eth-fun
 
 ## Usage
 
-### `allFunctions(code)`
+### `compile(code, options)`
 
-`allFunctions(code)` takes in valid Solidity code as an argument, compiles it
-and returns all functions in the code as they appear in the generated ABI.
+`compile(code, options)` takes a valid Solidity `code` string as an arguments
+and compiles it using solc. It returns a modified solc output as parsed JSON.
+All options used by eth-fun can be overwritten by passing an optional `options`
+object. The `options` object's shape can be inferred from
+[solc-js](https://github.com/ethereum/solc-js#high-level-api).
 
 ```js
-import { allFunctions } from "eth-fun";
+import { compile } from "eth-fun";
 
 const code =
   "pragma solidity ^0.6.12;\n contract C { function f() public { } }";
-const fns = allFunctions(code);
+const { contracts } = compile(code);
+console.log(contracts);
+> {
+>   C: {
+>     abi: [ [Object], [Object] ],
+>     devdoc: { kind: 'dev', methods: {}, version: 1 },
+>     evm: { "...": "..." }
+> 	}
+> }
+```
+
+### `allFunctions(compiledCode)`
+
+`allFunctions(compiledCode)` takes in a compiled Solidity contract (see
+function `compile(code)`) and returns all its functions in the standard ABI
+JSON notation.
+
+```js
+import { compile, allFunctions } from "eth-fun";
+
+const code =
+  "pragma solidity ^0.6.12;\n contract C { function f() public { } }";
+const { contracts }  = compile(code);
+const fns = allFunctions(contracts);
 console.log(fns);
->  [
->    {
->      inputs: [],
->      name: 'f',
->      outputs: [],
->      stateMutability: 'nonpayable',
->      type: 'function'
->    }
->  ]
+> {
+>   C: [
+>     {
+>       inputs: [],
+>       name: 'f',
+>       outputs: [],
+>       stateMutability: 'nonpayable',
+>       type: 'function'
+>     }
+>   ]
+> }
 ```
 
 ## Changelog
