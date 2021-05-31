@@ -97,6 +97,11 @@ console.log(fns);
 
 ## Changelog
 
+### 0.1.1
+
+- Add `getStorageAt` function
+- Add `blockNumber` function
+
 ### 0.1.0
 
 - Add `compile` function
