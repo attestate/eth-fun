@@ -12,6 +12,38 @@ $ npm i eth-fun
 
 ## Usage
 
+### `async blockNumber(url)`
+
+Gets the latest block number from the Ethereum node in `url`.
+
+```js
+import { blockNumber } from "eth-fun";
+
+const url = "https://cloudflare-eth.com";
+(async () => {
+  const number = await blockNumber(url);
+  console.log(number)
+})();
+```
+
+### `async getStorageAt(url, addr, index, blockNumber)`
+
+For a given contract `addr`, retrieves the storage value at `index` for
+`blockNumber`.
+
+```js
+import { getStorageAt } from "eth-fun";
+
+const url = "https://cloudflare-eth.com";
+const addr = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
+
+(async () => {
+  const number = await getStorageAt(url, addr, 0, "latest");
+  console.log(number)
+})();
+```
+
+
 ### `compile(code, options)`
 
 `compile(code, options)` takes a valid Solidity `code` string as an arguments
@@ -47,7 +79,7 @@ import { compile, allFunctions } from "eth-fun";
 
 const code =
   "pragma solidity ^0.6.12;\n contract C { function f() public { } }";
-const { contracts }  = compile(code);
+const { contracts } = compile(code);
 const fns = allFunctions(contracts);
 console.log(fns);
 > {
