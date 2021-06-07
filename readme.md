@@ -37,12 +37,9 @@ import { getStorageAt } from "eth-fun";
 const url = "https://cloudflare-eth.com";
 const addr = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
 
-(async () => {
-  const number = await getStorageAt(url, addr, 0, "latest");
-  console.log(number)
-})();
+const number = await getStorageAt(url, addr, 0, "latest");
+console.log(number)
 ```
-
 
 ### `compile(code, options)`
 
@@ -59,13 +56,13 @@ const code =
   "pragma solidity ^0.6.12;\n contract C { function f() public { } }";
 const { contracts } = compile(code);
 console.log(contracts);
-> {
->   C: {
->     abi: [ [Object], [Object] ],
->     devdoc: { kind: 'dev', methods: {}, version: 1 },
->     evm: { "...": "..." }
-> 	}
-> }
+// {
+//   C: {
+//     abi: [ [Object], [Object] ],
+//     devdoc: { kind: 'dev', methods: {}, version: 1 },
+//     evm: { "...": "..." }
+// 	}
+// }
 ```
 
 ### `allFunctions(compiledCode)`
@@ -82,17 +79,17 @@ const code =
 const { contracts } = compile(code);
 const fns = allFunctions(contracts);
 console.log(fns);
-> {
->   C: [
->     {
->       inputs: [],
->       name: 'f',
->       outputs: [],
->       stateMutability: 'nonpayable',
->       type: 'function'
->     }
->   ]
-> }
+// {
+//   C: [
+//     {
+//       inputs: [],
+//       name: 'f',
+//       outputs: [],
+//       stateMutability: 'nonpayable',
+//       type: 'function'
+//     }
+//   ]
+// }
 ```
 
 ## Changelog
