@@ -18,7 +18,7 @@ below. eth-fun's codebase shall be:
   to a client's browser.
 
 eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion (similar
-to react.js).
+to react.js). eth-fun is a **work-in-progress**.
 
 ## Installation
 
