@@ -151,6 +151,11 @@ console.log(fns);
 
 ## Changelog
 
+### 0.1.2
+
+- Add `nodes object` property
+- Add `getStorageLocation` function
+
 ### 0.1.1
 
 - Add `getStorageAt` function
