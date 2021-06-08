@@ -4,6 +4,22 @@
 
 > A functional library of Ethereum utility functions.
 
+## Why Use eth-fun?
+
+You should use eth-fun when you want to have _fun_. eth-fun is built with a 
+functional approach in mind. We try to build our code according to the properties
+below. eth-fun's codebase shall be:
+
+- modular and as loosely coupled as possible.
+- stateless; such that we come as close as possible towards atomic,
+  safely-failable (and catchable) actions.
+- built with a modern front end's needs in mind. Ideally, the whole lib is
+  tree-shakeable and produces the smallest footprint possible when being sent
+  to a client's browser.
+
+eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion (similar
+to react.js).
+
 ## Installation
 
 ```bash
