@@ -57,7 +57,7 @@ const number = await getStorageAt(url, addr, 0, "latest");
 console.log(number)
 ```
 
-### `compile(code, options)`
+### `compile(code, [options])`
 
 `compile(code, options)` takes a valid Solidity `code` string as an arguments
 and compiles it using solc. It returns a modified solc output as parsed JSON.
