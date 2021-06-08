@@ -81,6 +81,31 @@ console.log(contracts);
 // }
 ```
 
+### `getStorageLocation(contract, label)`
+
+Takes a compiled Solidity contract from `compile(code, [options])` and
+returns the storage location of a string `label`. Check the [Solidity
+docs](https://docs.soliditylang.org/en/v0.8.4/internals/layout_in_storage.html#json-output)
+for further information.
+
+```js
+import { getStorageLocation, compile } from "eth-fun";
+
+const code = "pragma solidity ^0.6.12;\ncontract A { uint x; }";
+const { contracts } = compile(code);
+const label = "x";
+const loc = getStorageLocation(contracts["A"], label);
+console.log(loc);
+// {
+//   astId: 3,
+//   contract: 'contract:A',
+//   label: 'x',
+//   offset: 0,
+//   slot: '0',
+//   type: 't_uint256'
+// }
+```
+
 ### `allFunctions(compiledCode)`
 
 `allFunctions(compiledCode)` takes in a compiled Solidity contract (see
