@@ -17,8 +17,8 @@ below. eth-fun's codebase shall be:
   tree-shakeable and produces the smallest footprint possible when being sent
   to a client's browser.
 
-eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion (similar
-to react.js). eth-fun is a **work-in-progress**.
+eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion
+(similar to react.js). eth-fun is a **work-in-progress**.
 
 ## Installation
 
@@ -27,6 +27,22 @@ $ npm i eth-fun
 ```
 
 ## Usage
+
+### `nodes object`
+
+There's a number of service providers that allow users and developers to access
+their node publicly and for free. eth-fun comes with a list of free nodes. A
+node is only listed when no API key is required for interacting with the node.
+
+```js
+import { nodes } from "eth-fun";
+console.log(nodes.mainnet[0]);
+// {
+//   name: "MyCrypto",
+//   endpoint: "https://api.mycryptoapi.com/eth",
+//   website: "https://mycrypto.com/"
+// },
+```
 
 ### `async blockNumber(url)`
 
