@@ -230,7 +230,7 @@ console.log(fns);
 - (Breaking change) All RPC functions may now throw a `RPCError` in
   case the remote procedure returns an error
 - Add `error object` to exports
-- Add `ethCall, `encodeCallSignature` and `decodeCallOutput` functions
+- Add `ethCall`, `encodeCallSignature` and `decodeCallOutput` functions
   to exports
 
 ### 0.1.2
