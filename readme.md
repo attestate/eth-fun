@@ -28,6 +28,72 @@ $ npm i eth-fun
 
 ## Usage
 
+### `encodeCallSignature(selector, types, values)`
+
+Given some meta data about a contract's function signature, it generates a
+hex-encoded Solidity string that can be passed as `data` parameter to e.g. a
+`eth_call`.  For reference, see Solidity's [ABI encoding
+specification](https://docs.soliditylang.org/en/develop/abi-spec.html).
+
+```js
+import { encodeCallSignature } from "eth-fun";
+
+const selector = "baz(uint32,bool)";
+const types = ["uint32", "bool"];
+const values = [69, true];
+
+const signature = encodeCallSignature(selector, types, values);
+console.log(signature);
+// 0xcdcd77c000000000000000000000000000000000000000000000000000000000000000450000000000000000000000000000000000000000000000000000000000000001
+```
+
+### `decodeCallOutput(types, output)`
+
+Given some meta data about a contract's function output signature, it decodes
+a hex-encoded Solidity string to human-readable return values.
+
+```js
+import { decodeCallOutput } from "eth-fun";
+const types = ["uint256"];
+const output = "0x00000000000000000000000000000000000000000000000041eb63d55b1b0000";
+const [ returnVal ] = decodeCallOutput(types, output);
+console.log(returnVal);
+// 4750000000000000000
+```
+
+### `async ethCall(node, from, to, data, blockNumber)`
+
+Executes an Ethereum message call directy and without creating a
+transaction.  For information to how to encode `data`, see function
+description of `encodeCallSignature`. And for description on how to
+decode an eth call's output, see `decodeCallOutput`.
+
+```js
+import { ethCall } from "eth-fun";
+
+(async () => {
+  const node = "https://cloudflare-eth.com";
+  const to = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
+  const data = "0x70a08231000000000000000000000000005241438caf3eacb05bb6543151f7af894c5b58";
+
+  const output = await ethCall(node, null, to, data);
+
+  console.log(output);
+})();
+```
+
+#### Notes
+
+- `from` is optional in the Ethereum json-rpc specification. To skip it, pass
+  `null` or any other falsy JavaScript value.
+- `blockNumber` is optional and defaults to `"latest"`
+- May throw custom `RPCError`
+
+### `errors object`
+
+An object that exposes a custom error called `RPCError`, which is thrown when
+the remote endpoint returns an error during a remote procedure call.
+
 ### `nodes object`
 
 There's a number of service providers that allow users and developers to access
@@ -58,6 +124,10 @@ const url = "https://cloudflare-eth.com";
 })();
 ```
 
+#### Notes
+
+- May throw custom `RPCError`
+
 ### `async getStorageAt(url, addr, index, blockNumber)`
 
 For a given contract `addr`, retrieves the storage value at `index` for
@@ -72,6 +142,10 @@ const addr = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
 const number = await getStorageAt(url, addr, 0, "latest");
 console.log(number)
 ```
+
+#### Notes
+
+- May throw custom `RPCError`
 
 ### `compile(code, [options])`
 

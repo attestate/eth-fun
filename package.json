@@ -17,7 +17,8 @@
   "dependencies": {
     "cross-fetch": "3.1.4",
     "solc": "0.6.12",
-    "test-readme-md": "0.0.2"
+    "test-readme-md": "0.0.2",
+    "web3-eth-abi": "1.4.0"
   },
   "devDependencies": {
     "ava": "3.15.0"
