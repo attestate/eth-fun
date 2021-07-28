@@ -225,9 +225,17 @@ console.log(fns);
 
 ## Changelog
 
+### 0.2.0
+
+- (Breaking change) All RPC functions may now throw a `RPCError` in
+  case the remote procedure returns an error
+- Add `error object` to exports
+- Add `ethCall, `encodeCallSignature` and `decodeCallOutput` functions
+  to exports
+
 ### 0.1.2
 
-- Add `nodes object` property
+- Add `nodes object` to exports
 - Add `getStorageLocation` function
 
 ### 0.1.1
