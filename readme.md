@@ -180,6 +180,14 @@ returns an object of named contracts with the list of functions.
   [solc@0.6.12](https://www.npmjs.com/package/solc/v/0.6.12).  For future
   versions, it'd be awesome if the version could be specified by the user.
 
+## References
+
+- [Ethereum Wiki json-rpc](https://eth.wiki/json-rpc/API)
+- [Ethereum openrpc specification](https://playground.open-rpc.org/?uiSchema%5BappBar%5D%5Bui:splitView%5D=false&schemaUrl=https://raw.githubusercontent.com/lightclient/eth1.0-apis/main/openrpc.json&uiSchema%5BappBar%5D%5Bui:input%5D=false)
+- [Geth docs RPC server](https://geth.ethereum.org/docs/rpc/server)
+- [OpenEthereum JSON RPC API](https://openethereum.github.io/JSONRPC)
+
+
 ## License
 
 See LICENSE file.
