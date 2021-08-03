@@ -3,6 +3,7 @@ import allFunctions from "./allFunctions.mjs";
 import getStorageLocation from "./getStorageLocation.mjs";
 import compile from "./compile.mjs";
 import blockNumber from "./blockNumber.mjs";
+import getBlockByNumber from "./getBlockByNumber.mjs";
 import { getStorageAt } from "./getStorageAt.mjs";
 import nodes from "./nodes.mjs";
 import { RPCError } from "./errors.mjs";
@@ -25,4 +26,5 @@ export {
   encodeCallSignature,
   decodeCallOutput,
   toHex,
+  getBlockByNumber
 };

@@ -28,6 +28,24 @@ $ npm i eth-fun
 
 ## Usage
 
+### `await getBlockByNumber(node, blockNumber, includeTxBodies)`
+
+Returns a block's metadata given it's `blockNumber` as a hexadecimal value.
+`includeTxBody` allows to shrink the block body by only including
+transaction hashes instead of all transaction bodies.
+
+```js
+import { blockNumber, getBlockByNumber } from "eth-fun";
+
+const url = "https://cloudflare-eth.com";
+(async () => {
+  const currentNumber = await blockNumber(url);
+  const includeTxBodies = false;
+  const block = await getBlockByNumber(url, currentNumber, includeTxBodies);
+  console.log(block);
+})();
+```
+
 ### `toHex(number)`
 
 Takes a JavaScript `Number` and converts it to its hexadecimal representation.
