@@ -3,6 +3,7 @@ import fetch from "cross-fetch";
 
 import { send } from "./transport.mjs";
 import constants from "./constants.mjs";
+import { toHex } from "./utils.mjs";
 
 const { id, jsonrpc } = constants;
 
@@ -18,10 +19,6 @@ export function bodyFactory(addr, index, blockNo) {
     id,
     jsonrpc
   };
-}
-
-export function toHex(num) {
-  return `0x${num.toString(16)}`;
 }
 
 export async function getStorageAt(node, addr, index, blockNo) {

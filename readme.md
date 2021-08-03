@@ -28,6 +28,20 @@ $ npm i eth-fun
 
 ## Usage
 
+### `toHex(number)`
+
+Takes a JavaScript `Number` and converts it to its hexadecimal representation.
+A `0x` is prepended to the number too;
+
+```js
+import { toHex } from "eth-fun";
+
+const num = 20;
+const hexNum = toHex(num);
+console.log(hexNum)
+// 0x14
+```
+
 ### `encodeCallSignature(selector, types, values)`
 
 Given some meta data about a contract's function signature, it generates a

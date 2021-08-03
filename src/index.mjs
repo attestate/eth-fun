@@ -5,8 +5,9 @@ import compile from "./compile.mjs";
 import blockNumber from "./blockNumber.mjs";
 import { getStorageAt } from "./getStorageAt.mjs";
 import nodes from "./nodes.mjs";
-import { RPCError }from "./errors.mjs";
+import { RPCError } from "./errors.mjs";
 import { ethCall, encodeCallSignature, decodeCallOutput } from "./ethCall.mjs";
+import { toHex } from "./utils.mjs";
 
 const errors = {
     RPCError
@@ -22,5 +23,6 @@ export {
   errors,
   ethCall,
   encodeCallSignature,
-  decodeCallOutput
+  decodeCallOutput,
+  toHex,
 };
