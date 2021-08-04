@@ -276,6 +276,14 @@ console.log(fns);
 
 ## Changelog
 
+### 0.3.0
+
+- (Breaking change) Change `node` (it was a URL) function parameter to
+`options` object for all JSON-RPC functions
+- (Breaking change) Rename `ethCall` to `call`
+- Expose `toHex` function
+- Add `getBlockByNumber` function
+
 ### 0.2.0
 
 - (Breaking change) All RPC functions may now throw a `RPCError` in
