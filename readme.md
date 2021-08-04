@@ -106,7 +106,7 @@ console.log(returnVal);
 // 4750000000000000000
 ```
 
-### `async ethCall(options, from, to, data, blockNumber)`
+### `async call(options, from, to, data, blockNumber)`
 
 Executes an Ethereum message call directy and without creating a
 transaction.  For information to how to encode `data`, see function
@@ -114,7 +114,7 @@ description of `encodeCallSignature`. And for description on how to
 decode an eth call's output, see `decodeCallOutput`.
 
 ```js
-import { ethCall } from "eth-fun";
+import { call } from "eth-fun";
 
 (async () => {
   const options = {
@@ -123,7 +123,7 @@ import { ethCall } from "eth-fun";
   const to = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
   const data = "0x70a08231000000000000000000000000005241438caf3eacb05bb6543151f7af894c5b58";
 
-  const output = await ethCall(options, null, to, data);
+  const output = await call(options, null, to, data);
   console.log(output);
 })();
 ```

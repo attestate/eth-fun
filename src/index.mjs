@@ -7,7 +7,7 @@ import getBlockByNumber from "./getBlockByNumber.mjs";
 import { getStorageAt } from "./getStorageAt.mjs";
 import nodes from "./nodes.mjs";
 import { RPCError } from "./errors.mjs";
-import { ethCall, encodeCallSignature, decodeCallOutput } from "./ethCall.mjs";
+import { call, encodeCallSignature, decodeCallOutput } from "./call.mjs";
 import { toHex } from "./utils.mjs";
 
 const errors = {
@@ -22,7 +22,7 @@ export {
   getStorageLocation,
   nodes,
   errors,
-  ethCall,
+  call,
   encodeCallSignature,
   decodeCallOutput,
   toHex,

@@ -27,7 +27,7 @@ export function decodeCallOutput(types, output) {
   return parsedResults;
 }
 
-export async function ethCall(
+export async function call(
   options,
   from,
   to,

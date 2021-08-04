@@ -1,7 +1,7 @@
 // @format
 import test from "ava";
 
-import { ethCall, encodeCallSignature, decodeCallOutput } from "../src/ethCall.mjs";
+import { call, encodeCallSignature, decodeCallOutput } from "../src/call.mjs";
 
 test("if encoding a eth call works", t => {
   const selector = "baz(uint32,bool)";
@@ -34,7 +34,7 @@ test("if getBalance eth_call works on DSS contract", async t => {
     url: "https://cloudflare-eth.com"
   };
 
-  const output = await ethCall(options, from, to, data, blockNumber);
+  const output = await call(options, from, to, data, blockNumber);
   t.truthy(output);
   // TODO: Figure out why the result for balanceOf is 64 digits and not 32
   t.is(output.length, 66);
@@ -57,7 +57,7 @@ test("if null can be passed to from and call still works", async t => {
     url: "https://cloudflare-eth.com"
   };
 
-  const output = await ethCall(options, from, to, data, blockNumber);
+  const output = await call(options, from, to, data, blockNumber);
   t.truthy(output);
   // TODO: Figure out why the result for balanceOf is 64 digits and not 32
   t.is(output.length, 66);
