@@ -4,9 +4,9 @@ import constants from "./constants.mjs";
 
 const { id, jsonrpc } = constants;
 
-export default async function getBlockNo(node) {
+export default async function getBlockNo(options) {
   const body = blockNoFactory();
-  return await send(node, body);
+  return await send(options, body);
 }
 
 function blockNoFactory() {

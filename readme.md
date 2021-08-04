@@ -28,7 +28,17 @@ $ npm i eth-fun
 
 ## Usage
 
-### `await getBlockByNumber(node, blockNumber, includeTxBodies)`
+### `options object`
+
+`options` are passed to any JSON-RPC call. They may contain the following
+properties:
+
+|name|required?|default|
+|---|---|---|
+|url|yes|`undefined`|
+|headers|no|`{"Content-Type": "application/json"}`|
+
+### `await getBlockByNumber(options, blockNumber, includeTxBodies)`
 
 Returns a block's metadata given it's `blockNumber` as a hexadecimal value.
 `includeTxBody` allows to shrink the block body by only including
@@ -37,11 +47,14 @@ transaction hashes instead of all transaction bodies.
 ```js
 import { blockNumber, getBlockByNumber } from "eth-fun";
 
-const url = "https://cloudflare-eth.com";
+const options = { 
+  url: "https://cloudflare-eth.com"
+};
+
 (async () => {
-  const currentNumber = await blockNumber(url);
+  const currentNumber = await blockNumber(options);
   const includeTxBodies = false;
-  const block = await getBlockByNumber(url, currentNumber, includeTxBodies);
+  const block = await getBlockByNumber(options, currentNumber, includeTxBodies);
   console.log(block);
 })();
 ```
@@ -93,7 +106,7 @@ console.log(returnVal);
 // 4750000000000000000
 ```
 
-### `async ethCall(node, from, to, data, blockNumber)`
+### `async ethCall(options, from, to, data, blockNumber)`
 
 Executes an Ethereum message call directy and without creating a
 transaction.  For information to how to encode `data`, see function
@@ -104,12 +117,13 @@ decode an eth call's output, see `decodeCallOutput`.
 import { ethCall } from "eth-fun";
 
 (async () => {
-  const node = "https://cloudflare-eth.com";
+  const options = {
+    url: "https://cloudflare-eth.com"
+  };
   const to = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
   const data = "0x70a08231000000000000000000000000005241438caf3eacb05bb6543151f7af894c5b58";
 
-  const output = await ethCall(node, null, to, data);
-
+  const output = await ethCall(options, null, to, data);
   console.log(output);
 })();
 ```
@@ -142,16 +156,19 @@ console.log(nodes.mainnet[0]);
 // },
 ```
 
-### `async blockNumber(url)`
+### `async blockNumber(options)`
 
 Gets the latest block number from the Ethereum node in `url`.
 
 ```js
 import { blockNumber } from "eth-fun";
 
-const url = "https://cloudflare-eth.com";
+const options = {
+  url: "https://cloudflare-eth.com"
+};
+
 (async () => {
-  const number = await blockNumber(url);
+  const number = await blockNumber(options);
   console.log(number)
 })();
 ```
@@ -160,7 +177,7 @@ const url = "https://cloudflare-eth.com";
 
 - May throw custom `RPCError`
 
-### `async getStorageAt(url, addr, index, blockNumber)`
+### `async getStorageAt(options, addr, index, blockNumber)`
 
 For a given contract `addr`, retrieves the storage value at `index` for
 `blockNumber`.
@@ -168,10 +185,12 @@ For a given contract `addr`, retrieves the storage value at `index` for
 ```js
 import { getStorageAt } from "eth-fun";
 
-const url = "https://cloudflare-eth.com";
+const options = {
+  url: "https://cloudflare-eth.com"
+};
 const addr = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
 
-const number = await getStorageAt(url, addr, 0, "latest");
+const number = await getStorageAt(options, addr, 0, "latest");
 console.log(number)
 ```
 

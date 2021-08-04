@@ -6,6 +6,12 @@
   "scripts": {
     "test": "ava --verbose"
   },
+  "ava": {
+    "nodeArguments": [
+      "--loader=quibble",
+      "--no-warnings"
+    ]
+  },
   "keywords": [
     "ethereum",
     "solidity",
@@ -21,6 +27,8 @@
     "web3-eth-abi": "1.4.0"
   },
   "devDependencies": {
-    "ava": "3.15.0"
+    "ava": "3.15.0",
+    "fetch-mock": "9.11.0",
+    "quibble": "0.6.5"
   }
 }

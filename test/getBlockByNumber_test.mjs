@@ -1,14 +1,15 @@
 // @format
 import test from "ava";
 
-import { blockNumber, getBlockByNumber} from "../src/index.mjs";
-
-const node = "https://cloudflare-eth.com";
+import { blockNumber, getBlockByNumber } from "../src/index.mjs";
 
 test("getting a block full of transactions", async t => {
-  const currentNumber = await blockNumber(node);
+  const options = {
+    url: "https://cloudflare-eth.com"
+  };
+  const currentNumber = await blockNumber(options);
   const includeTxBody = false;
-  const block = await getBlockByNumber(node, currentNumber, includeTxBody);
+  const block = await getBlockByNumber(options, currentNumber, includeTxBody);
   t.truthy(block);
   t.truthy(block.transactions);
   t.assert(block.transactions.length > 0);

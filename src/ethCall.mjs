@@ -28,7 +28,7 @@ export function decodeCallOutput(types, output) {
 }
 
 export async function ethCall(
-  node,
+  options,
   from,
   to,
   data,
@@ -57,7 +57,7 @@ export async function ethCall(
 
   let res;
   try {
-    res = await send(node, body);
+    res = await send(options, body);
   } catch (err) {
     throw err;
   }

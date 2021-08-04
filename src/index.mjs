@@ -11,7 +11,7 @@ import { ethCall, encodeCallSignature, decodeCallOutput } from "./ethCall.mjs";
 import { toHex } from "./utils.mjs";
 
 const errors = {
-    RPCError
+  RPCError
 };
 
 export {
@@ -26,5 +26,5 @@ export {
   encodeCallSignature,
   decodeCallOutput,
   toHex,
-  getBlockByNumber
+  getBlockByNumber,
 };

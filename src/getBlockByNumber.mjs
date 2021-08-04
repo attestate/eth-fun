@@ -6,11 +6,11 @@ import { toHex } from "./utils.mjs";
 const { id, jsonrpc } = constants;
 
 export default async function getBlockByNumber(
-  node,
+  options,
   blockNumber,
   includeTxBodies
 ) {
-  return await send(node, {
+  return await send(options, {
     method: "eth_getBlockByNumber",
     params: [blockNumber, includeTxBodies],
     id,
