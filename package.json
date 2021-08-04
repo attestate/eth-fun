@@ -4,7 +4,7 @@
   "description": "A treeshake-ready, functional library of Ethereum utility functions",
   "main": "src/index.mjs",
   "scripts": {
-    "test": "ava --verbose"
+    "test": "ava --verbose --timeout 20s"
   },
   "ava": {
     "nodeArguments": [
