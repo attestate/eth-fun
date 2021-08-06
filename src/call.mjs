@@ -3,7 +3,6 @@ import abi from "web3-eth-abi";
 
 import { send } from "./transport.mjs";
 import constants from "./constants.mjs";
-import { RPCError } from "./errors.mjs";
 
 const { id, jsonrpc } = constants;
 
@@ -55,12 +54,5 @@ export async function call(
     delete body.params[0].from;
   }
 
-  let res;
-  try {
-    res = await send(options, body);
-  } catch (err) {
-    throw err;
-  }
-
-  return res;
+  return await send(options, body);
 }
