@@ -1,15 +1,15 @@
 //@format
 import fetch from "cross-fetch";
-import {RPCError} from "./errors.mjs";
+import { RPCError } from "./errors.mjs";
 
 export async function send(options, body) {
-  let headers = Object.assign({}, { "Content-Type": "application/json"});
+  let headers = Object.assign({}, { "Content-Type": "application/json" });
   if (options && options.headers) {
     headers = Object.assign(headers, options.headers);
   }
 
   let url;
-  if(!options.url) {
+  if (!options.url) {
     throw new Error("`url` is a required property of `options`");
   } else {
     url = options.url;
@@ -20,6 +20,18 @@ export async function send(options, body) {
     headers,
     body: JSON.stringify(body)
   });
+
+  if (res.status === 403) {
+    const answer = await res.text();
+    if (answer.includes("invalid host specified")) {
+      throw new RPCError(
+        `Status: 403 Forbidden; Ethereum node answered with: "${answer}".`
+      );
+    } else {
+      throw new Error("Unexpected error. Please report on eth-fun repository.");
+    }
+  }
+
   const data = await res.json();
 
   if (data.error) {
