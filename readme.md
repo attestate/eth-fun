@@ -276,6 +276,10 @@ console.log(fns);
 
 ## Changelog
 
+### 0.4.0
+
+- New build process allows to target CommonJS projects in e.g. node.js
+
 ### 0.3.0
 
 - (Breaking change) Change `node` (it was a URL) function parameter to
