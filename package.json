@@ -17,8 +17,8 @@
     "test": "ava --verbose --timeout 20s"
   },
   "pre-commit": [
-    "test",
     "build:node",
+    "test",
     "git:add"
   ],
   "ava": {
