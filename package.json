@@ -2,11 +2,18 @@
   "name": "eth-fun",
   "version": "0.4.0",
   "description": "A treeshake-ready, functional library of Ethereum utility functions",
-  "main": "dist/eth-fun.js",
   "type": "module",
+  "main": "./cjs/index.js",
+  "exports": {
+    ".": {
+      "require":  "./cjs/index.js",
+      "default": "./src/index.js"
+    }
+  },
+  "module": "./src/index.js",
   "scripts": {
-    "build:node": "esbuild src/index.js --outfile=dist/eth-fun.js --sourcemap --bundle --platform=node --target=node14.16.1",
-    "git:add": "git update-index --add dist/eth-fun.js dist/eth-fun.js.map",
+    "build:node": "node build.js",
+    "git:add": "git update-index --add cjs/*",
     "test": "ava --verbose --timeout 20s"
   },
   "pre-commit": [
