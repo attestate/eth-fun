@@ -2,17 +2,37 @@
   "name": "eth-fun",
   "version": "0.4.0",
   "description": "A treeshake-ready, functional library of Ethereum utility functions",
-  "main": "dist/eth-fun.js",
+  "type": "module",
+  "main": "./cjs/index.js",
+  "exports": {
+    ".": {
+      "require":  "./cjs/index.js",
+      "default": "./src/index.js"
+    }
+  },
+  "module": "./src/index.js",
   "scripts": {
-    "build:node": "esbuild src/index.mjs --outfile=dist/eth-fun.js --sourcemap --bundle --platform=node --target=node14.16.1",
-    "git:add": "git update-index --add dist/eth-fun.js dist/eth-fun.js.map",
+    "build:node": "node build.js",
+    "git:add": "git update-index --add cjs/*",
     "test": "ava --verbose --timeout 20s"
   },
-  "pre-commit": ["test", "build:node", "git:add"],
+  "pre-commit": [
+    "build:node",
+    "test",
+    "git:add"
+  ],
   "ava": {
-    "nodeArguments": ["--loader=quibble", "--no-warnings"]
+    "nodeArguments": [
+      "--loader=quibble",
+      "--no-warnings"
+    ]
   },
-  "keywords": ["ethereum", "solidity", "utility", "functional"],
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "utility",
+    "functional"
+  ],
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
   "license": "GPL-3.0-only",
   "dependencies": {
@@ -23,6 +43,7 @@
   },
   "devDependencies": {
     "ava": "3.15.0",
+    "esbuild": "^0.12.28",
     "fetch-mock": "9.11.0",
     "pre-commit": "1.2.2",
     "quibble": "0.6.5"
