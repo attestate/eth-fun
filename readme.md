@@ -276,6 +276,10 @@ console.log(fns);
 
 ## Changelog
 
+### 0.5.0
+
+- Export both ESM and CJS modules as package using "conditional exports"
+
 ### 0.4.0
 
 - New build process allows to target CommonJS projects in e.g. node.js
