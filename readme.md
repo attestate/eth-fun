@@ -276,7 +276,7 @@ console.log(fns);
 // }
 ```
 
-### `getLogs(options, {fromBlock, toBlock, address, topics, limit })`
+### `async getLogs(options, {fromBlock, toBlock, address, topics, limit })`
 
 Returns an array of all logs matching a given filterObject. [Events](https://docs.soliditylang.org/en/develop/contracts.html?highlight=topic#events) emitted in smart contracts are stored as transaction's log.
 
@@ -340,7 +340,7 @@ import { getLogs } from "eth-fun";
 
 #### Notes
 
-- Eth clients such as `https://cloudflare-eth.com` only support logs of the latest 128 blocks.
+- Some Ethereum nodes such as `https://cloudflare-eth.com` only support logs of the latest 128 blocks.
 
 ## Changelog
 
