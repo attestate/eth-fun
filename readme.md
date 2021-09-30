@@ -292,7 +292,7 @@ filterObject = {
 
 All the options in filterObject are optional. For more details, see [_Open Ethereum Documentation_](https://openethereum.github.io/JSONRPC-eth-module#eth_getlogs).
 
-See, https://ethereum.stackexchange.com/a/12951 for information about events and how to filter them using topics.
+See, [Ethereum's StackExchange](https://ethereum.stackexchange.com/a/12951) for information about events and how to filter them using topics.
 
 ```js
 import { getLogs } from "eth-fun";
