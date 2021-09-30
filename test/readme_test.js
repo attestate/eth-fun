@@ -16,11 +16,11 @@ content = content.replace(
 const blocks = matchBlocks("js", content);
 
 for (let block of blocks) {
-  test(`run ${block.split("\n")[0]}`, async t => {
+  test(`run ${block.split("\n")[0]}`, async (t) => {
     try {
       await exec(block);
     } catch (err) {
-      console.log(err);
+      t.log(err); // prints log alongside the test instead of immediately printing them to stdout
       t.fail();
     }
 

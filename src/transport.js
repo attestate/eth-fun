@@ -18,7 +18,7 @@ export async function send(options, body) {
   const res = await fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   });
 
   if (res.status === 403) {

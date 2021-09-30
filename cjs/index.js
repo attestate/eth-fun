@@ -49,6 +49,7 @@ __export(exports, {
   encodeCallSignature: () => encodeCallSignature,
   errors: () => errors,
   getBlockByNumber: () => getBlockByNumber,
+  getLogs: () => getLogs,
   getStorageAt: () => getStorageAt,
   getStorageLocation: () => getStorageLocation,
   nodes: () => nodes_default,
@@ -282,6 +283,23 @@ async function call(options, from, to, data, blockNumber = "latest") {
   return await send(options, body);
 }
 
+// src/getLogs.js
+var { id: id5, jsonrpc: jsonrpc5 } = constants_default;
+async function getLogs(options, { fromBlock, toBlock, address, topics, limit } = {}) {
+  const body = {
+    method: "eth_getLogs",
+    params: [{ fromBlock, toBlock, address, topics, limit }],
+    id: id5,
+    jsonrpc: jsonrpc5
+  };
+  for (const value in body.params[0]) {
+    if (!body.params[0][value]) {
+      delete body.params[0][value];
+    }
+  }
+  return await send(options, body);
+}
+
 // src/index.js
 var errors = {
   RPCError
@@ -296,6 +314,7 @@ var errors = {
   encodeCallSignature,
   errors,
   getBlockByNumber,
+  getLogs,
   getStorageAt,
   getStorageLocation,
   nodes,
