@@ -17,6 +17,7 @@ test("Import CommonJS build", (t) => {
       "decodeCallOutput",
       "toHex",
       "getBlockByNumber",
+      "getLogs",
     ].sort()
   );
 

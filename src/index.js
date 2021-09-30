@@ -9,9 +9,10 @@ import nodes from "./nodes.js";
 import { RPCError } from "./errors.js";
 import { call, encodeCallSignature, decodeCallOutput } from "./call.js";
 import { toHex } from "./utils.js";
+import getLogs from "./getLogs.js";
 
 const errors = {
-  RPCError
+  RPCError,
 };
 
 export {
@@ -27,4 +28,5 @@ export {
   decodeCallOutput,
   toHex,
   getBlockByNumber,
+  getLogs,
 };
