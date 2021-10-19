@@ -1,21 +1,20 @@
 import test from "ava";
-import getLogs from "../src/getLogs.js";
+import esmock from "esmock";
+import fetchMock from "fetch-mock";
 
 const options = {
   url: "https://nodes.mewapi.io/rpc/eth",
 };
 
 test("fetch logs from a given range of block numbers", async (t) => {
-  const output = await getLogs(options, {
-    fromBlock: "0xc60891",
-    toBlock: null,
-    address: "0x8b0acaa0cdc89f0a76acd246177dd75b9614af43",
-    topics: [
-      "0xe1c4fa794edfa8f619b8257a077398950357b9c6398528f94480307352f9afcc",
-    ],
-  });
+  const fromBlock = "0xc60891";
+  const toBlock = null;
+  const address = "0x8b0acaa0cdc89f0a76acd246177dd75b9614af43";
+  const topics = [
+    "0xe1c4fa794edfa8f619b8257a077398950357b9c6398528f94480307352f9afcc",
+  ];
 
-  t.deepEqual(output, [
+  const mockOutput = [
     {
       address: "0x8b0acaa0cdc89f0a76acd246177dd75b9614af43",
       blockHash:
@@ -34,5 +33,31 @@ test("fetch logs from a given range of block numbers", async (t) => {
         "0x231a00b46517e6a53c5a05f7c2053319d610ef25f7066e1f90434aaa353f40e4",
       transactionIndex: "0xa0",
     },
-  ]);
+  ];
+
+  const getLogs = await esmock("../src/getLogs.js", null, {
+    "cross-fetch": {
+      default: fetchMock.sandbox().post(
+        {
+          url: options.url,
+          body: {
+            method: "eth_getLogs",
+            params: [{ fromBlock, address, topics }],
+            id: 1,
+            jsonrpc: "2.0",
+          },
+        },
+        { result: mockOutput }
+      ),
+    },
+  });
+
+  const output = await getLogs(options, {
+    fromBlock,
+    toBlock,
+    address,
+    topics,
+  });
+
+  t.deepEqual(output, mockOutput);
 });
