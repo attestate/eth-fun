@@ -132,8 +132,6 @@ async function send(options, body) {
   } else {
     url = options.url;
   }
-  console.log(body.method);
-  console.log(body);
   const res = await (0, import_cross_fetch.default)(url, {
     method: "POST",
     headers,
