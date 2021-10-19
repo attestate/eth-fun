@@ -1,26 +1,23 @@
 // @format
 import test from "ava";
-import quibble from "quibble";
 import fetchMock from "fetch-mock";
+import esmock from "esmock";
 
 import { send } from "../src/transport.js";
 
-test.after.always(t => {
-	quibble.reset();
-});
-
-test.serial("if extra headers are sent in request", async t => {
+test.serial("if extra headers are sent in request", async (t) => {
   const body = { hello: "world" };
 
   const options = {
     url: "https://test1.com",
-    headers: { Authorization: "Bearer bear" }
+    headers: { Authorization: "Bearer bear" },
   };
 
   fetchMock.post(options, { body: { result: true }, status: 200 });
   const sandbox = fetchMock.sandbox();
-  await quibble.esm("cross-fetch", undefined, sandbox);
-  const mockSend = (await import("../src/transport.js")).send;
+  const { send: mockSend } = await esmock("../src/transport.js", null, {
+    "cross-fetch": { default: sandbox },
+  });
 
   t.true(await mockSend(options, body));
   const [_, call] = sandbox.lastCall();
@@ -28,10 +25,9 @@ test.serial("if extra headers are sent in request", async t => {
     call.headers,
     Object.assign({}, options.headers, { "Content-Type": "application/json" })
   );
-  quibble.reset();
 });
 
-test.serial("if RPCError is thrown on a 403 error from the node", async t => {
+test.serial("if RPCError is thrown on a 403 error from the node", async (t) => {
   const body = { hello: "world" };
 
   const options = {
@@ -41,16 +37,17 @@ test.serial("if RPCError is thrown on a 403 error from the node", async t => {
 
   fetchMock.post(options, { body: "invalid host specified", status: 403 });
   const sandbox = fetchMock.sandbox();
-  await quibble.esm("cross-fetch", undefined, sandbox);
-  const mockSend = (await import("../src/transport.js")).send;
-  const RPCError = (await import("../src/errors.js")).RPCError;
+  const { send: mockSend } = await esmock("../src/transport.js", null, {
+    "cross-fetch": { default: sandbox },
+  });
 
   await t.throwsAsync(async () => await mockSend(options, body), {
-    instanceOf: RPCError
+    message:
+      'Status: 403 Forbidden; Ethereum node answered with: "invalid host specified".',
   });
 });
 
-test("if error is thrown when `url` property isn't present in `options`", async t => {
+test("if error is thrown when `url` property isn't present in `options`", async (t) => {
   await t.throwsAsync(async () =>
     send({ "send-not-present": "it's not there" })
   );

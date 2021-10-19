@@ -23,7 +23,7 @@
   ],
   "ava": {
     "nodeArguments": [
-      "--loader=quibble",
+      "--loader=esmock",
       "--no-warnings"
     ]
   },
@@ -44,8 +44,8 @@
   "devDependencies": {
     "ava": "3.15.0",
     "esbuild": "^0.12.28",
-    "fetch-mock": "9.11.0",
-    "pre-commit": "1.2.2",
-    "quibble": "0.6.5"
+    "esmock": "^0.4.0",
+    "fetch-mock": "^9.11.0",
+    "pre-commit": "1.2.2"
   }
 }
