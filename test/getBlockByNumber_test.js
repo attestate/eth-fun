@@ -3,10 +3,14 @@ import test from "ava";
 import esmock from "esmock";
 import fetchMock from "fetch-mock";
 
+import constants from "../src/constants.js";
+
 test("getting a block full of transactions", async (t) => {
   const options = {
     url: "https://cloudflare-eth.com",
   };
+  const currentNumber = "0xcd2057";
+  const includeTxBody = false;
 
   const { getBlockByNumber } = await esmock("../src/index.js", null, {
     "cross-fetch": {
@@ -15,8 +19,9 @@ test("getting a block full of transactions", async (t) => {
           url: options.url,
           body: {
             method: "eth_getBlockByNumber",
+            params: [currentNumber, includeTxBody],
+            ...constants,
           },
-          matchPartialBody: true,
         },
         {
           result: {
@@ -29,8 +34,6 @@ test("getting a block full of transactions", async (t) => {
     },
   });
 
-  const currentNumber = "0xcd2057";
-  const includeTxBody = false;
   const block = await getBlockByNumber(options, currentNumber, includeTxBody);
   t.truthy(block);
   t.truthy(block.transactions);

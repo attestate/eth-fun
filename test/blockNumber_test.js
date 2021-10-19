@@ -3,6 +3,8 @@ import test from "ava";
 import esmock from "esmock";
 import fetchMock from "fetch-mock";
 
+import constants from "../src/constants.js";
+
 test("getting block number", async (t) => {
   const options = {
     url: "https://cloudflare-eth.com",
@@ -18,8 +20,9 @@ test("getting block number", async (t) => {
             url: options.url,
             body: {
               method: "eth_blockNumber",
+              params: [],
+              ...constants,
             },
-            matchPartialBody: true,
           },
           {
             result: "0xcd2057",

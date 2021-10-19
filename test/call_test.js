@@ -4,6 +4,7 @@ import esmock from "esmock";
 import fetchMock from "fetch-mock";
 
 import { encodeCallSignature, decodeCallOutput } from "../src/call.js";
+import constants from "../src/constants.js";
 
 test("if encoding a eth call works", (t) => {
   const selector = "baz(uint32,bool)";
@@ -46,8 +47,8 @@ test("if getBalance eth_call works on DSS contract", async (t) => {
           body: {
             method: "eth_call",
             params: [{ from, to, data }, blockNumber],
+            ...constants,
           },
-          matchPartialBody: true,
         },
         {
           result:
@@ -88,8 +89,8 @@ test("if null can be passed to from and call still works", async (t) => {
           body: {
             method: "eth_call",
             params: [{ to, data }, blockNumber],
+            ...constants,
           },
-          matchPartialBody: true,
         },
         {
           result:
