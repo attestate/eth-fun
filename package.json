@@ -46,7 +46,6 @@
     "esbuild": "^0.12.28",
     "esmock": "^0.4.0",
     "fetch-mock": "^9.11.0",
-    "pre-commit": "1.2.2",
-    "quibble": "0.6.5"
+    "pre-commit": "1.2.2"
   }
 }
