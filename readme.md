@@ -344,6 +344,10 @@ import { getLogs } from "eth-fun";
 
 ## Changelog
 
+### 0.5.1
+
+- Add `getLogs` function
+
 ### 0.5.0
 
 - Export both ESM and CJS modules as package using "conditional exports"
