@@ -1,0 +1,17 @@
+{
+  "name": "limit-requests",
+  "version": "1.0.0",
+  "description": "Example for limiting requests when using eth-fun",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Rug Pull Index",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "eth-fun": "^0.5.1",
+    "p-limit": "^4.0.0"
+  }
+}

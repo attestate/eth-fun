@@ -342,6 +342,10 @@ import { getLogs } from "eth-fun";
 
 - Some Ethereum nodes such as `https://cloudflare-eth.com` only support logs of the latest 128 blocks.
 
+## Examples
+
+- [limit-requests](/examples/limit-requests) - An example to demonstrate concurrency so that the RPC endpoint doesn't get choked
+
 ## Changelog
 
 ### 0.5.1
