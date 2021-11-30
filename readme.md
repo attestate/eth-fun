@@ -22,14 +22,37 @@ eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion
 
 ## About
 
-
 ## Installation
 
 ```bash
 $ npm i eth-fun
 ```
 
-## Quick Usage
+## Example
+
+#### Get the latest block number and fetch information about it
+
+```js
+import { blockNumber, getBlockByNumber } from "eth-fun";
+
+// URL of an Ethereum node
+const options = {
+  url: "https://cloudflare-eth.com", 
+};
+
+(async () => {
+  const currentNumber = await blockNumber(options); // latest block
+  const includeTxBodies = false;
+  const block = await getBlockByNumber(options, currentNumber, includeTxBodies);
+  console.log(block); // information about the block
+})();
+```
+
+Similar to the above used functions i.e. `blockNumber` and `getBlockByNumber`
+eth-fun implements more utility functions to talk with an Ethereum node using
+[JSON RPC](https://ethereum.org/en/developers/docs/apis/json-rpc/).
+
+Visit [API documentation]() for a complete list of functions and their examples.
 
 ## Usage
 
