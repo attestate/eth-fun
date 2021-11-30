@@ -7,6 +7,8 @@
 
 > A collection of independent utility functions for Ethereum. Build with functional approach in mind.
 
+#### [API Documentation](/API.md) | [Changelog](/CHANGELOG.md)
+
 ## Why Use eth-fun?
 
 You should use eth-fun when you want to have _fun_. We try to build our
@@ -22,8 +24,6 @@ code according to the properties below.
 
 eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion
 (similar to react.js). eth-fun is a **work-in-progress**.
-
-## About
 
 ## Installation
 
@@ -87,6 +87,13 @@ Visit [CHANGELOG.md](/CHANGELOG.md)
 - Currently we're pinning
   [solc@0.6.12](https://www.npmjs.com/package/solc/v/0.6.12). For future
   versions, it'd be awesome if the version could be specified by the user.
+  
+## Contributing
+We love contributions from the community. Find a [good first issue](https://github.com/rugpullindex/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+
+Want to suggest a feature or even better raise a PR for it? Head over to the [issues](https://github.com/rugpullindex/eth-fun/issues) section or join our [discord](https://discord.gg/zhawZxgKQz).
+
+You can also get paid for a PR. For more information read our [handbook](https://github.com/rugpullindex/documents/blob/master/handbook.md).
 
 ## References
 
