@@ -2,29 +2,34 @@
 
 [![Node.js CI](https://github.com/rugpullindex/eth-fns/actions/workflows/node.js.yml/badge.svg)](https://github.com/rugpullindex/eth-fns/actions/workflows/node.js.yml)
 
-> A functional library of Ethereum utility functions.
+> A collection of independent utility functions for Ethereum. Build with functional approach in mind.
 
 ## Why Use eth-fun?
 
-You should use eth-fun when you want to have _fun_. eth-fun is built with a
-functional approach in mind. We try to build our code according to the properties
-below. eth-fun's codebase shall be:
+You should use eth-fun when you want to have _fun_. We try to build our
+code according to the properties below.
 
-- modular and as loosely coupled as possible.
-- stateless; such that we come as close as possible towards atomic,
+- **Functional** in nature
+- **Modular** and as **loosely** coupled as possible.
+- **Stateless**; such that we come as close as possible towards atomic,
   safely-failable (and catchable) actions.
-- built with a modern front end's needs in mind. Ideally, the whole lib is
-  tree-shakeable and produces the smallest footprint possible when being sent
+- Built with a modern front end's needs in mind. Ideally, the whole lib is
+  **tree-shakeable** and produces the **smallest footprint** possible when being sent
   to a client's browser.
 
 eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion
 (similar to react.js). eth-fun is a **work-in-progress**.
+
+## About
+
 
 ## Installation
 
 ```bash
 $ npm i eth-fun
 ```
+
+## Quick Usage
 
 ## Usage
 
