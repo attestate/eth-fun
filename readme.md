@@ -1,5 +1,8 @@
 # eth-fun
 
+![](assets/eth-fun-logo-light.svg#gh-light-mode-only)
+![](assets/eth-fun-logo-dark.svg#gh-dark-mode-only)
+
 [![Node.js CI](https://github.com/rugpullindex/eth-fns/actions/workflows/node.js.yml/badge.svg)](https://github.com/rugpullindex/eth-fns/actions/workflows/node.js.yml)
 
 > A collection of independent utility functions for Ethereum. Build with functional approach in mind.
