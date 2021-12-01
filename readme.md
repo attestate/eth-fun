@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="/assets/eth-fun-logo-light.svg#gh-light-mode-only" />
-  <img src"/assets/eth-fun-logo-dark.svg#gh-dark-mode-only" />
+  <img src="/assets/eth-fun-logo-dark.svg#gh-dark-mode-only" />
 </p>
 
 ### A collection of independent utility functions for Ethereum. Build with functional approach in mind.
