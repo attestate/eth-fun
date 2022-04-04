@@ -8,6 +8,7 @@
 </p>
 
 ### A collection of independent utility functions for Ethereum. Build with functional approach in mind.
+
 #### [API Documentation](/API.md) | [Changelog](/CHANGELOG.md) | [Contributing](readme.md/#Contributing)
 
 ## Why Use eth-fun?
@@ -41,7 +42,7 @@ import { blockNumber, getBlockByNumber } from "eth-fun";
 
 // URL of an Ethereum node
 const options = {
-  url: "https://cloudflare-eth.com", 
+  url: "https://cloudflare-eth.com",
 };
 
 (async () => {
@@ -62,6 +63,7 @@ Visit [API documentation](/API.md) for a complete list of functions and their ex
 
 - [`options object`](/API.md#options-object)
 - [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](/API.md#await-getblockbynumberoptions-blocknumber-includetxbodies)
+- [`await getTransactionReceipt(options, txId)`](/API.md#await-gettransactionreceiptoptions-txid)
 - [`toHex(number)`](/API.md#tohexnumber)
 - [`encodeCallSignature(selector, types, values)`](/API.md#encodecallsignatureselector-types-values)
 - [`decodeCallOutput(types, output)`](/API.md#decodecalloutputtypes-output)
@@ -88,8 +90,9 @@ Visit [CHANGELOG.md](/CHANGELOG.md)
 - Currently we're pinning
   [solc@0.6.12](https://www.npmjs.com/package/solc/v/0.6.12). For future
   versions, it'd be awesome if the version could be specified by the user.
-  
+
 ## Contributing
+
 We love contributions from the community. Find a [good first issue](https://github.com/rugpullindex/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
 Want to suggest a feature or even better raise a PR for it? Head over to the [issues](https://github.com/rugpullindex/eth-fun/issues) section or join our [discord](https://discord.gg/zhawZxgKQz).

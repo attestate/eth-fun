@@ -1,8 +1,10 @@
 # API
 
 Table of contents:
+
 - [`options object`](#options-object)
 - [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](#await-getblockbynumberoptions-blocknumber-includetxbodies)
+- [`await getTransactionReceipt(options, txId)`](/API.md#await-gettransactionreceiptoptions-txid)
 - [`toHex(number)`](#tohexnumber)
 - [`encodeCallSignature(selector, types, values)`](#encodecallsignatureselector-types-values)
 - [`decodeCallOutput(types, output)`](#decodecalloutputtypes-output)
@@ -25,6 +27,26 @@ properties:
 | ------- | --------- | -------------------------------------- |
 | url     | yes       | `undefined`                            |
 | headers | no        | `{"Content-Type": "application/json"}` |
+
+### `await getTransactionReceipt(options, txId)`
+
+Returns a transaction's receipt given it's `hash` as a hexadecimal value.
+
+```js
+import { getTransactionReceipt } from "eth-fun";
+
+const options = {
+  url: "https://cloudflare-eth.com",
+};
+
+const txId =
+  "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238";
+
+(async () => {
+  const receipt = await getTransactionReceipt(options, txId);
+  console.log(receipt);
+})();
+```
 
 ### `await getBlockByNumber(options, blockNumber, includeTxBodies)`
 

@@ -52,6 +52,7 @@ __export(exports, {
   getLogs: () => getLogs,
   getStorageAt: () => getStorageAt,
   getStorageLocation: () => getStorageLocation,
+  getTransactionReceipt: () => getTransactionReceipt,
   nodes: () => nodes_default,
   toHex: () => toHex
 });
@@ -183,6 +184,14 @@ async function getBlockByNumber(options, blockNumber, includeTxBodies) {
     id: id2,
     jsonrpc: jsonrpc2
   });
+}
+
+// src/getTransactionReceipt.js
+async function getTransactionReceipt(options, txId) {
+  return await send(options, __spreadValues({
+    method: "eth_getTransactionReceipt",
+    params: [txId]
+  }, constants_default));
 }
 
 // src/getStorageAt.js
@@ -317,6 +326,7 @@ var errors = {
   getLogs,
   getStorageAt,
   getStorageLocation,
+  getTransactionReceipt,
   nodes,
   toHex
 });
