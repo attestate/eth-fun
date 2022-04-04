@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.5.2
+
+- Add `getTransactionReceipt` function
+
 ### 0.5.1
 
 - Add `getLogs` function
