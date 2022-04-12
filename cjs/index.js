@@ -146,6 +146,9 @@ async function send(options, body) {
       throw new Error("Unexpected error. Please report on eth-fun repository.");
     }
   }
+  if (res.status >= 500) {
+    throw new RPCError(`RPC endpoint sent status: "${res.status}"`);
+  }
   const data = await res.json();
   if (data.error) {
     throw new RPCError(`${data.error.message} Code: ${data.error.code}`);

@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.5.3
+
+- Have the `transport` module throw a `RPCError`s upon encountering a status
+  `>= 500` from an Ethereum full node.
+
 ### 0.5.2
 
 - Add `getTransactionReceipt` function

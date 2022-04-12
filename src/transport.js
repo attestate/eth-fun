@@ -32,6 +32,10 @@ export async function send(options, body) {
     }
   }
 
+  if (res.status >= 500) {
+    throw new RPCError(`RPC endpoint sent status: "${res.status}"`);
+  }
+
   const data = await res.json();
 
   if (data.error) {
