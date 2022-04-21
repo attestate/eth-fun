@@ -116,6 +116,11 @@ console.log(returnVal);
 // 4750000000000000000
 ```
 
+#### Notes:
+
+- `decodeCallOutput` may throw errors in cases where it cannot parse the user's
+input.
+
 ### `async call(options, from, to, data, blockNumber)`
 
 Executes an Ethereum message call directy and without creating a
