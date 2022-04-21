@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.6.0
+
+- Remove `solc` and all related functions (`allFunctions`, `getStorageLocation`
+  & `compile`).
+
 ### 0.5.3
 
 - Have the `transport` module throw a `RPCError`s upon encountering a status
