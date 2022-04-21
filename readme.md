@@ -85,12 +85,6 @@ Visit [API documentation](/API.md) for a complete list of functions and their ex
 
 Visit [CHANGELOG.md](/CHANGELOG.md)
 
-## Caveats
-
-- Currently we're pinning
-  [solc@0.6.12](https://www.npmjs.com/package/solc/v/0.6.12). For future
-  versions, it'd be awesome if the version could be specified by the user.
-
 ## Contributing
 
 We love contributions from the community. Find a [good first issue](https://github.com/rugpullindex/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).

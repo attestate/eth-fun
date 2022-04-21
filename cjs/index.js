@@ -41,71 +41,18 @@ var __toModule = (module2) => {
 
 // src/index.js
 __export(exports, {
-  allFunctions: () => allFunctions,
   blockNumber: () => getBlockNo,
   call: () => call,
-  compile: () => compile,
   decodeCallOutput: () => decodeCallOutput,
   encodeCallSignature: () => encodeCallSignature,
   errors: () => errors,
   getBlockByNumber: () => getBlockByNumber,
   getLogs: () => getLogs,
   getStorageAt: () => getStorageAt,
-  getStorageLocation: () => getStorageLocation,
   getTransactionReceipt: () => getTransactionReceipt,
   nodes: () => nodes_default,
   toHex: () => toHex
 });
-
-// src/allFunctions.js
-function allFunctions(contracts) {
-  let fns = {};
-  for (let [key, impl] of Object.entries(contracts)) {
-    fns[key] = impl.abi.filter(({ type }) => type === "function");
-  }
-  return fns;
-}
-
-// src/getStorageLocation.js
-function getStorageLocation(contract, soughtLabel) {
-  const { storageLayout } = contract;
-  return storageLayout.storage.find(({ label }) => label === soughtLabel);
-}
-
-// src/compile.js
-var import_solc = __toModule(require("solc"));
-function compile(code, options = {}) {
-  let input = __spreadValues({
-    language: "Solidity",
-    sources: {
-      contract: {
-        content: code
-      }
-    },
-    settings: {
-      outputSelection: {
-        "*": {
-          "*": ["*"]
-        }
-      }
-    }
-  }, options);
-  input = JSON.stringify(input);
-  let out = import_solc.default.compile(input);
-  out = JSON.parse(out);
-  if (out && out.errors) {
-    const severe = out.errors.filter(({ severity }) => severity === "error");
-    if (severe.length > 0) {
-      const msgs = severe.map(({ formattedMessage }) => formattedMessage).join("\n");
-      throw new Error(`Compiling the code lead to (multiple) severe errors:
-        ${msgs}
-      `);
-    }
-  }
-  out.contracts = out.contracts.contract;
-  delete out.sources;
-  return out;
-}
 
 // src/transport.js
 var import_cross_fetch = __toModule(require("cross-fetch"));
@@ -318,17 +265,14 @@ var errors = {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  allFunctions,
   blockNumber,
   call,
-  compile,
   decodeCallOutput,
   encodeCallSignature,
   errors,
   getBlockByNumber,
   getLogs,
   getStorageAt,
-  getStorageLocation,
   getTransactionReceipt,
   nodes,
   toHex

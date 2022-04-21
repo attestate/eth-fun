@@ -5,11 +5,8 @@ test("Import CommonJS build", (t) => {
   t.deepEqual(
     Object.keys(ethFun),
     [
-      "allFunctions",
-      "compile",
       "blockNumber",
       "getStorageAt",
-      "getStorageLocation",
       "nodes",
       "errors",
       "call",

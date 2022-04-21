@@ -1,7 +1,4 @@
 // @format
-import allFunctions from "./allFunctions.js";
-import getStorageLocation from "./getStorageLocation.js";
-import compile from "./compile.js";
 import blockNumber from "./blockNumber.js";
 import getBlockByNumber from "./getBlockByNumber.js";
 import getTransactionReceipt from "./getTransactionReceipt.js";
@@ -17,11 +14,8 @@ const errors = {
 };
 
 export {
-  allFunctions,
-  compile,
   blockNumber,
   getStorageAt,
-  getStorageLocation,
   nodes,
   errors,
   call,
