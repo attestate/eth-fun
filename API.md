@@ -82,6 +82,10 @@ console.log(hexNum);
 // 0x14
 ```
 
+#### Notes:
+
+- `toHex` throw errors if `typeof num !== "number"`.
+
 ### `encodeCallSignature(selector, types, values)`
 
 Given some meta data about a contract's function signature, it generates a
@@ -119,7 +123,7 @@ console.log(returnVal);
 #### Notes:
 
 - `decodeCallOutput` may throw errors in cases where it cannot parse the user's
-input.
+  input.
 
 ### `async call(options, from, to, data, blockNumber)`
 

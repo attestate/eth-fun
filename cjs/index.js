@@ -67,6 +67,15 @@ var RPCError = class extends Error {
     this.name = "RPCError";
   }
 };
+var ValueError = class extends Error {
+  constructor(...params) {
+    super(...params);
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ValueError);
+    }
+    this.name = "ValueError";
+  }
+};
 
 // src/transport.js
 async function send(options, body) {
@@ -122,6 +131,8 @@ function blockNoFactory() {
 
 // src/utils.js
 function toHex(num) {
+  if (typeof num !== "number")
+    throw new ValueError(`toHex expects typeof "number", input type: "${typeof num}"`);
   return `0x${num.toString(16)}`;
 }
 
