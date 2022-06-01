@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.7.0
+
+- `toHex(num)` now throws when `typeof num !== "number"`
+
 ### 0.6.0
 
 - Remove `solc` and all related functions (`allFunctions`, `getStorageLocation`
