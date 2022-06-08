@@ -1,6 +1,6 @@
 {
   "name": "eth-fun",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A treeshake-ready, functional library of Ethereum utility functions",
   "type": "module",
   "main": "./cjs/index.js",
@@ -20,11 +20,23 @@
     "git:add": "git update-index --add cjs/*",
     "test": "ava --verbose --timeout 20s"
   },
-  "pre-commit": ["build:node", "test", "git:add"],
+  "pre-commit": [
+    "build:node",
+    "test",
+    "git:add"
+  ],
   "ava": {
-    "nodeArguments": ["--loader=esmock", "--no-warnings"]
+    "nodeArguments": [
+      "--loader=esmock",
+      "--no-warnings"
+    ]
   },
-  "keywords": ["ethereum", "solidity", "utility", "functional"],
+  "keywords": [
+    "ethereum",
+    "solidity",
+    "utility",
+    "functional"
+  ],
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
   "license": "GPL-3.0-only",
   "dependencies": {
