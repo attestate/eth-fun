@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.7.1
+
+- For any kind of call to an Ethereum full node, when doing an RPC call, when
+  the HTTP request returned a status 200, but the body didn't contain a valid
+  JSON object, eth-fun emitted a `FetchError` that didn't show the text body to
+  the developer. eth-fun now includes the non-json body in the error message so
+  that developers understand what went wrong in the HTTP request and its
+  parsing.
+
 ### 0.7.0
 
 - `toHex(num)` now throws when `typeof num !== "number"`
