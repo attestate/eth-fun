@@ -105,9 +105,12 @@ async function send(options, body) {
   if (res.status >= 500) {
     throw new RPCError(`RPC endpoint sent status: "${res.status}"`);
   }
-  const data = await res.json();
-  if (data.error) {
-    throw new RPCError(`${data.error.message} Code: ${data.error.code}`);
+  const result = await res.text();
+  let data;
+  try {
+    data = JSON.parse(result);
+  } catch (err) {
+    throw new RPCError(`Encountered error when trying to parse JSON body result: "${result}", error: "${err.toString()}"`);
   }
   return data.result;
 }
