@@ -95,10 +95,7 @@ You can also get paid for a PR. For more information read our [handbook](https:/
 
 ## References
 
-- [Ethereum Wiki json-rpc](https://eth.wiki/json-rpc/API)
-- [Ethereum openrpc specification](https://playground.open-rpc.org/?uiSchema%5BappBar%5D%5Bui:splitView%5D=false&schemaUrl=https://raw.githubusercontent.com/lightclient/eth1.0-apis/main/openrpc.json&uiSchema%5BappBar%5D%5Bui:input%5D=false)
-- [Geth docs RPC server](https://geth.ethereum.org/docs/rpc/server)
-- [OpenEthereum JSON RPC API](https://openethereum.github.io/JSONRPC)
+- [Ethereum JSON-RPC Specification](https://ethereum.github.io/execution-apis/api-documentation/)
 
 ## License
 
