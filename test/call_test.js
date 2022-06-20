@@ -6,6 +6,24 @@ import fetchMock from "fetch-mock";
 import { encodeCallSignature, decodeCallOutput } from "../src/call.js";
 import constants from "../src/constants.js";
 
+test("eth_call with non-hex block number tag must not return undefined", async (t) => {
+  const from = "0x005241438cAF3eaCb05bB6543151f7AF894C5B58";
+  const to = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
+  const selector = "balanceOf(address)";
+  const inputTypes = ["address"];
+  const values = [from];
+  const blockNumber = "1234";
+  const data = encodeCallSignature(selector, inputTypes, values);
+  const options = {
+    url: "https://cloudflare-eth.com",
+  };
+
+  const { call } = await import("../src/call.js");
+
+  const output = await call(options, from, to, data, blockNumber);
+  t.not(output, undefined);
+});
+
 test("if encoding a eth call works", (t) => {
   const selector = "baz(uint32,bool)";
   const types = ["uint32", "bool"];
