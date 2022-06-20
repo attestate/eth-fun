@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0
+
+- When Ethereum full node call results in a HTTP status `200 OK` but the
+  payload contained an error `{error: { code: "XXXX", message: "error message"}}` we didn't throw but returned `results: undefined` which was
+  undefined behavior.
+
 ### 0.7.1
 
 - For any kind of call to an Ethereum full node, when doing an RPC call, when
