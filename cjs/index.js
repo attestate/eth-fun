@@ -112,6 +112,9 @@ async function send(options, body) {
   } catch (err) {
     throw new RPCError(`Encountered error when trying to parse JSON body result: "${result}", error: "${err.toString()}"`);
   }
+  if (data.error && data.error.message) {
+    throw new RPCError(`Error from fullnode: ${data.error.message}`);
+  }
   return data.result;
 }
 
