@@ -47,5 +47,11 @@ export async function send(options, body) {
     );
   }
 
+  // NOTE: Finally, this matches when the full node throws a JSON
+  // RPC error.
+  if (data.error && data.error.message) {
+    throw new RPCError(`Error from fullnode: ${data.error.message}`);
+  }
+
   return data.result;
 }

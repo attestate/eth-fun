@@ -4,6 +4,7 @@ import esmock from "esmock";
 import fetchMock from "fetch-mock";
 
 import { encodeCallSignature, decodeCallOutput } from "../src/call.js";
+import { RPCError } from "../src/errors.js";
 import constants from "../src/constants.js";
 
 test("eth_call with non-hex block number tag must not return undefined", async (t) => {
@@ -19,9 +20,9 @@ test("eth_call with non-hex block number tag must not return undefined", async (
   };
 
   const { call } = await import("../src/call.js");
-
-  const output = await call(options, from, to, data, blockNumber);
-  t.not(output, undefined);
+  await t.throwsAsync(
+    async () => await call(options, from, to, data, blockNumber)
+  );
 });
 
 test("if encoding a eth call works", (t) => {
