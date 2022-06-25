@@ -25,7 +25,9 @@ code according to the properties below.
   to a client's browser.
 
 eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion
-(similar to react.js). eth-fun is a **work-in-progress**.
+(similar to react.js). Today, eth-fun can't sign payloads. It works best in on-chain
+data extractors like https://rugpullindex.com and https://neume.network. eth-fun is a 
+**work-in-progress**.
 
 ## Installation
 
