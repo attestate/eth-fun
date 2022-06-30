@@ -92,6 +92,7 @@ async function send(options, body) {
   const res = await (0, import_cross_fetch.default)(url, {
     method: "POST",
     headers,
+    signal: options.signal,
     body: JSON.stringify(body)
   });
   if (res.status === 403) {

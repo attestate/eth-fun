@@ -2,6 +2,7 @@
 import test from "ava";
 import fetchMock from "fetch-mock";
 import esmock from "esmock";
+import AbortController from "abort-controller";
 
 import { send } from "../src/transport.js";
 import { RPCError } from "../src/errors.js";
@@ -39,6 +40,36 @@ test.serial("if >= 500 server error throws", async (t) => {
   });
 
   await t.throwsAsync(async () => await mockSend(options));
+});
+
+test.serial("if abort signal is executed", async (t) => {
+  const body = { hello: "world" };
+
+  const mockOptions = {
+    url: "https://test2309.com",
+    headers: { Authorization: "Bearer bear" },
+  };
+
+  const delay = 1000;
+  fetchMock.post(
+    mockOptions,
+    { body: { result: true }, status: 200 },
+    { delay }
+  );
+  const sandbox = fetchMock.sandbox();
+  const { send: mockSend } = await esmock("../src/transport.js", null, {
+    "cross-fetch": { default: sandbox },
+  });
+
+  const controller = new AbortController();
+  const options = {
+    ...mockOptions,
+    signal: controller.signal,
+  };
+  const maxTimeout = 500;
+  let timer = setTimeout(() => controller.abort(), maxTimeout);
+  await t.throwsAsync(async () => await mockSend(options, body));
+  clearTimeout(timer);
 });
 
 test.serial("if extra headers are sent in request", async (t) => {

@@ -2,6 +2,7 @@
 import test from "ava";
 import esmock from "esmock";
 import fetchMock from "fetch-mock";
+import AbortController from "abort-controller";
 
 import { encodeCallSignature, decodeCallOutput } from "../src/call.js";
 import { RPCError } from "../src/errors.js";
@@ -44,6 +45,54 @@ test("if decoding a eth call result works", (t) => {
   t.is(expected / Math.pow(10, 18), 4.75);
   const [res] = decodeCallOutput(types, output);
   t.is(res, expected);
+});
+
+test("if eth_call can be aborted by timeout", async (t) => {
+  const from = "0x005241438cAF3eaCb05bB6543151f7AF894C5B58";
+  const to = "0x6B175474E89094C44Da98b954EedeAC495271d0F";
+  const selector = "balanceOf(address)";
+  const inputTypes = ["address"];
+  const values = [from];
+  const blockNumber = "latest";
+  const data = encodeCallSignature(selector, inputTypes, values);
+  const mockOptions = {
+    url: "https://cloudflare-eth.com",
+  };
+
+  const delay = 1000;
+  const { call } = await esmock("../src/call.js", null, {
+    "cross-fetch": {
+      default: fetchMock.sandbox().post(
+        {
+          url: mockOptions.url,
+          body: {
+            method: "eth_call",
+            params: [{ from, to, data }, blockNumber],
+            ...constants,
+          },
+        },
+        {
+          result:
+            "0x00000000000000000000000000000000000000000000000041eb63d55b1b0000",
+        },
+        {
+          delay,
+        }
+      ),
+    },
+  });
+
+  const controller = new AbortController();
+  const options = {
+    ...mockOptions,
+    signal: controller.signal,
+  };
+  const maxTimeout = 500;
+  let timer = setTimeout(() => controller.abort(), maxTimeout);
+  await t.throwsAsync(
+    async () => await call(options, from, to, data, blockNumber)
+  );
+  clearTimeout(timer);
 });
 
 test("if getBalance eth_call works on DSS contract", async (t) => {

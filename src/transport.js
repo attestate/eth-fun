@@ -18,6 +18,7 @@ export async function send(options, body) {
   const res = await fetch(url, {
     method: "POST",
     headers,
+    signal: options.signal,
     body: JSON.stringify(body),
   });
 

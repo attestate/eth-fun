@@ -26,6 +26,7 @@ properties:
 | ------- | --------- | -------------------------------------- |
 | url     | yes       | `undefined`                            |
 | headers | no        | `{"Content-Type": "application/json"}` |
+| [signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal) | no        | `undefined` |
 
 ### `await getTransactionReceipt(options, txId)`
 
