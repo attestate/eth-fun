@@ -2,9 +2,12 @@
 
 ### 0.8.0
 
-- When Ethereum full node call results in a HTTP status `200 OK` but the
-  payload contained an error `{error: { code: "XXXX", message: "error message"}}` we didn't throw but returned `results: undefined` which was
+- (breaking) When an Ethereum full node call results in a HTTP status `200 OK`
+  but the payload contained an error `{error: { code: "XXXX", message: "error message"}}` we didn't throw but returned `results: undefined` which was
   undefined behavior.
+- In `options`, allow users to define
+  [`AbortController.signal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal)
+  to self-manage the lifecycle of a fetch request.
 
 ### 0.7.1
 
