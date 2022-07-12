@@ -20,23 +20,11 @@
     "git:add": "git update-index --add cjs/*",
     "test": "ava --verbose --timeout 20s"
   },
-  "pre-commit": [
-    "build:node",
-    "test",
-    "git:add"
-  ],
+  "pre-commit": ["build:node", "test", "git:add"],
   "ava": {
-    "nodeArguments": [
-      "--loader=esmock",
-      "--no-warnings"
-    ]
+    "nodeArguments": ["--loader=esmock", "--no-warnings"]
   },
-  "keywords": [
-    "ethereum",
-    "solidity",
-    "utility",
-    "functional"
-  ],
+  "keywords": ["ethereum", "solidity", "utility", "functional"],
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io/)",
   "license": "GPL-3.0-only",
   "dependencies": {
@@ -51,5 +39,13 @@
     "fetch-mock": "^9.11.0",
     "pre-commit": "1.2.2",
     "test-readme-md": "0.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rugpullindex/eth-fun.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rugpullindex/eth-fun/issues"
+  },
+  "homepage": "https://github.com/rugpullindex/eth-fun#readme"
 }
