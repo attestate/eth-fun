@@ -42,7 +42,7 @@ For information on their usage and implementations, refer to the docs of web3.
 
 #### `decodeParameters`
 
-A speciality is that `decodeParameters returns an iterable list insteads of a `Results` object.
+A speciality is that `decodeParameters` returns an iterable list insteads of a `Results` object.
 
 ```js
 import { decodeParameters } from "eth-fun";
