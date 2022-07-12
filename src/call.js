@@ -1,21 +1,15 @@
 // @format
-import abi from "web3-eth-abi";
-
 import { send } from "./transport.js";
 import constants from "./constants.js";
 
 const { id, jsonrpc } = constants;
 
-export function encodeCallSignature(selector, types, values) {
-  let data = abi.encodeFunctionSignature(selector);
-  const encodedParams = abi.encodeParameters(types, values);
-
-  // NOTE: `encodeParams` preprends `0x` to all return values
-  data += encodedParams.substring(2, encodedParams.length);
-  return data;
-}
-
-export function decodeCallOutput(types, output) {
+import abi from "web3-eth-abi";
+const encodeFunctionSignature = (...args) =>
+  abi.encodeFunctionSignature(...args);
+const encodeFunctionCall = (...args) => abi.encodeFunctionCall(...args);
+const encodeParameters = (...args) => abi.encodeParameters(...args);
+const decodeParameters = (types, output) => {
   const res = abi.decodeParameters(types, output);
 
   const parsedResults = [];
@@ -24,27 +18,30 @@ export function decodeCallOutput(types, output) {
   }
 
   return parsedResults;
-}
+};
+const eventFunctionSignature = (...args) => abi.eventFunctionSignature(...args);
 
-export async function call(
-  options,
-  from,
-  to,
-  data,
-  blockNumber="latest"
-) {
+export {
+  encodeFunctionSignature,
+  encodeFunctionCall,
+  encodeParameters,
+  decodeParameters,
+  eventFunctionSignature,
+};
+
+export async function call(options, from, to, data, blockNumber = "latest") {
   const body = {
     method: "eth_call",
     params: [
       {
         from,
         to,
-        data
+        data,
       },
-      blockNumber
+      blockNumber,
     ],
     id,
-    jsonrpc
+    jsonrpc,
   };
 
   // NOTE: `from` is optional in json-rpc specification. But if we pass `null`

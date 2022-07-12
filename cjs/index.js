@@ -43,8 +43,10 @@ var __toModule = (module2) => {
 __export(exports, {
   blockNumber: () => getBlockNo,
   call: () => call,
-  decodeCallOutput: () => decodeCallOutput,
-  encodeCallSignature: () => encodeCallSignature,
+  decodeParameters: () => decodeParameters,
+  encodeFunctionCall: () => encodeFunctionCall,
+  encodeFunctionSignature: () => encodeFunctionSignature,
+  encodeParameters: () => encodeParameters,
   errors: () => errors,
   getBlockByNumber: () => getBlockByNumber,
   getLogs: () => getLogs,
@@ -226,20 +228,17 @@ var nodes_default = nodes;
 // src/call.js
 var import_web3_eth_abi = __toModule(require("web3-eth-abi"));
 var { id: id4, jsonrpc: jsonrpc4 } = constants_default;
-function encodeCallSignature(selector, types, values) {
-  let data = import_web3_eth_abi.default.encodeFunctionSignature(selector);
-  const encodedParams = import_web3_eth_abi.default.encodeParameters(types, values);
-  data += encodedParams.substring(2, encodedParams.length);
-  return data;
-}
-function decodeCallOutput(types, output) {
+var encodeFunctionSignature = (...args) => import_web3_eth_abi.default.encodeFunctionSignature(...args);
+var encodeFunctionCall = (...args) => import_web3_eth_abi.default.encodeFunctionCall(...args);
+var encodeParameters = (...args) => import_web3_eth_abi.default.encodeParameters(...args);
+var decodeParameters = (types, output) => {
   const res = import_web3_eth_abi.default.decodeParameters(types, output);
   const parsedResults = [];
   for (let i = 0; i < res.__length__; i++) {
     parsedResults.push(res[i]);
   }
   return parsedResults;
-}
+};
 async function call(options, from, to, data, blockNumber = "latest") {
   const body = {
     method: "eth_call",
@@ -285,8 +284,10 @@ var errors = {
 0 && (module.exports = {
   blockNumber,
   call,
-  decodeCallOutput,
-  encodeCallSignature,
+  decodeParameters,
+  encodeFunctionCall,
+  encodeFunctionSignature,
+  encodeParameters,
   errors,
   getBlockByNumber,
   getLogs,

@@ -6,8 +6,11 @@ Table of contents:
 - [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](#await-getblockbynumberoptions-blocknumber-includetxbodies)
 - [`await getTransactionReceipt(options, txId)`](/API.md#await-gettransactionreceiptoptions-txid)
 - [`toHex(number)`](#tohexnumber)
-- [`encodeCallSignature(selector, types, values)`](#encodecallsignatureselector-types-values)
-- [`decodeCallOutput(types, output)`](#decodecalloutputtypes-output)
+- [`encodeFunctionSignature(selector)`](#web3-eth-abi-functions)
+- [`encodeEventSignature(selector)`](#web3-eth-abi-functions)
+- [`encodeParameters(typesArray, parameters)`](#web3-eth-abi-functions)
+- [`encodeFunctionCall(jsonInterface, parameters)`](#web3-eth-abi-functions)
+- [`decodeParameters(typesArray, parameters)`](#decodeparameters)
 - [`async call(options, from, to, data, blockNumber)`](#async-calloptions-from-to-data-blocknumber)
 - [`errors object`](#errors-object)
 - [`nodes object`](#nodes-object)
@@ -22,11 +25,33 @@ Table of contents:
 `options` are passed to any JSON-RPC call. They may contain the following
 properties:
 
-| name    | required? | default                                |
-| ------- | --------- | -------------------------------------- |
-| url     | yes       | `undefined`                            |
-| headers | no        | `{"Content-Type": "application/json"}` |
-| [signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal) | no        | `undefined` |
+| name                                                                              | required? | default                                |
+| --------------------------------------------------------------------------------- | --------- | -------------------------------------- |
+| url                                                                               | yes       | `undefined`                            |
+| headers                                                                           | no        | `{"Content-Type": "application/json"}` |
+| [signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal) | no        | `undefined`                            |
+
+### `web3-eth-abi` functions
+
+The functions `encodeFunctionSignature`, `encodeEventSignature`,
+`encodeParameters`, `encodeFunctionCall`, `decodeParameters` are directly
+imported and exported from
+[`web3-eth-abi@1.4.0`](https://web3js.readthedocs.io/en/v1.4.0/web3-eth-abi.html).
+For information on their usage and implementations, refer to the docs of web3.
+
+#### `decodeParameters`
+
+A speciality is that `decodeParameters returns an iterable list insteads of a `Results` object.
+
+```js
+import { decodeParameters } from "eth-fun";
+const types = ["uint256"];
+const output =
+  "0x00000000000000000000000000000000000000000000000041eb63d55b1b0000";
+const [returnVal] = decodeParameters(types, output);
+console.log(returnVal);
+// 4750000000000000000
+```
 
 ### `await getTransactionReceipt(options, txId)`
 
@@ -87,51 +112,12 @@ console.log(hexNum);
 
 - `toHex` throw errors if `typeof num !== "number"`.
 
-### `encodeCallSignature(selector, types, values)`
-
-Given some meta data about a contract's function signature, it generates a
-hex-encoded Solidity string that can be passed as `data` parameter to e.g. a
-`eth_call`. For reference, see Solidity's [ABI encoding
-specification](https://docs.soliditylang.org/en/develop/abi-spec.html).
-
-```js
-import { encodeCallSignature } from "eth-fun";
-
-const selector = "baz(uint32,bool)";
-const types = ["uint32", "bool"];
-const values = [69, true];
-
-const signature = encodeCallSignature(selector, types, values);
-console.log(signature);
-// 0xcdcd77c000000000000000000000000000000000000000000000000000000000000000450000000000000000000000000000000000000000000000000000000000000001
-```
-
-### `decodeCallOutput(types, output)`
-
-Given some meta data about a contract's function output signature, it decodes
-a hex-encoded Solidity string to human-readable return values.
-
-```js
-import { decodeCallOutput } from "eth-fun";
-const types = ["uint256"];
-const output =
-  "0x00000000000000000000000000000000000000000000000041eb63d55b1b0000";
-const [returnVal] = decodeCallOutput(types, output);
-console.log(returnVal);
-// 4750000000000000000
-```
-
-#### Notes:
-
-- `decodeCallOutput` may throw errors in cases where it cannot parse the user's
-  input.
-
 ### `async call(options, from, to, data, blockNumber)`
 
 Executes an Ethereum message call directy and without creating a
 transaction. For information to how to encode `data`, see function
-description of `encodeCallSignature`. And for description on how to
-decode an eth call's output, see `decodeCallOutput`.
+description of `encodeFunctionCall`. And for description on how to
+decode an eth call's output, see `decodeParameters`.
 
 ```js
 import { call } from "eth-fun";
