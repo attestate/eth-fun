@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.9.0
+
+- (breaking) Replace `function encodeCallSignature(...)` with `function encodeFunctionCall(...)`
+- (breaking) Replace `function decodeCallOutput(...)` with `function decodeParameters(...)`
+- From `web3-eth-abi` package, add:
+  - `function encodeFunctionSignature(...)`
+  - `function encodeEventSignature(...)`
+  - `function encodeParameters(...)`
+- Add a note about the absence of `function fromHex(number)`
+- Relax node engine requirements in `package.json`
+
 ### 0.8.0
 
 - (breaking) When an Ethereum full node call results in a HTTP status `200 OK`
