@@ -26,7 +26,7 @@ code according to the properties below.
 
 eth-fun is an attempt at developing Ethereum in a one-way-dataflow fashion
 (similar to react.js). Today, eth-fun can't sign payloads. It works best in on-chain
-data extractors like https://rugpullindex.com and https://neume.network. eth-fun is a 
+data extractors like https://rugpullindex.com and https://neume.network. eth-fun is a
 **work-in-progress**.
 
 ## Installation
@@ -63,23 +63,24 @@ eth-fun implements more utility functions to talk with an Ethereum node using
 
 Visit [API documentation](/API.md) for a complete list of functions and their examples.
 
-- [`options object`](#options-object)
-- [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](#await-getblockbynumberoptions-blocknumber-includetxbodies)
+- [`options object`](/API.md#options-object)
+- [`await getBlockByNumber(options, blockNumber, includeTxBodiesw)`](/API.md#await-getblockbynumberoptions-blocknumber-includetxbodies)
 - [`await getTransactionReceipt(options, txId)`](/API.md#await-gettransactionreceiptoptions-txid)
-- [`toHex(number)`](#tohexnumber)
-- [`encodeFunctionSignature(selector)`](#web3-eth-abi-functions)
-- [`encodeEventSignature(selector)`](#web3-eth-abi-functions)
-- [`encodeParameters(typesArray, parameters)`](#web3-eth-abi-functions)
-- [`encodeFunctionCall(jsonInterface, parameters)`](#web3-eth-abi-functions)
-- [`decodeParameters(typesArray, parameters)`](#decodeparameters)
-- [`async call(options, from, to, data, blockNumber)`](#async-calloptions-from-to-data-blocknumber)
-- [`errors object`](#errors-object)
-- [`nodes object`](#nodes-object)
-- [`async blockNumber(options)`](#async-blocknumberoptions)
-- [`async getStorageAt(options, addr, index, blockNumber)`](#async-getstorageatoptions-addr-index-blocknumber)
-- [`getStorageLocation(contract, label)`](#getstoragelocationcontract-label)
-- [`allFunctions(compiledCode)`](#allfunctionscompiledcode)
-- [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
+- [`toHex(number)`](/API.md#tohexnumber)
+- [`fromHex(number)`](/API.md#fromhexnumber)
+- [`encodeFunctionSignature(selector)`](/API.md#web3-eth-abi-functions)
+- [`encodeEventSignature(selector)`](/API.md#web3-eth-abi-functions)
+- [`encodeParameters(typesArray, parameters)`](/API.md#web3-eth-abi-functions)
+- [`encodeFunctionCall(jsonInterface, parameters)`](/API.md#web3-eth-abi-functions)
+- [`decodeParameters(typesArray, parameters)`](/API.md#decodeparameters)
+- [`async call(options, from, to, data, blockNumber)`](/API.md#async-calloptions-from-to-data-blocknumber)
+- [`errors object`](/API.md#errors-object)
+- [`nodes object`](/API.md#nodes-object)
+- [`async blockNumber(options)`](/API.md#async-blocknumberoptions)
+- [`async getStorageAt(options, addr, index, blockNumber)`](/API.md#async-getstorageatoptions-addr-index-blocknumber)
+- [`getStorageLocation(contract, label)`](/API.md#getstoragelocationcontract-label)
+- [`allFunctions(compiledCode)`](/API.md#allfunctionscompiledcode)
+- [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](/API.md#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
 
 ## Examples
 

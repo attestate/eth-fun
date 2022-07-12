@@ -2,23 +2,24 @@
 
 Table of contents:
 
-- [`options object`](#options-object)
-- [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](#await-getblockbynumberoptions-blocknumber-includetxbodies)
+- [`options object`](/API.md#options-object)
+- [`await getBlockByNumber(options, blockNumber, includeTxBodiesw)`](/API.md#await-getblockbynumberoptions-blocknumber-includetxbodies)
 - [`await getTransactionReceipt(options, txId)`](/API.md#await-gettransactionreceiptoptions-txid)
-- [`toHex(number)`](#tohexnumber)
-- [`encodeFunctionSignature(selector)`](#web3-eth-abi-functions)
-- [`encodeEventSignature(selector)`](#web3-eth-abi-functions)
-- [`encodeParameters(typesArray, parameters)`](#web3-eth-abi-functions)
-- [`encodeFunctionCall(jsonInterface, parameters)`](#web3-eth-abi-functions)
-- [`decodeParameters(typesArray, parameters)`](#decodeparameters)
-- [`async call(options, from, to, data, blockNumber)`](#async-calloptions-from-to-data-blocknumber)
-- [`errors object`](#errors-object)
-- [`nodes object`](#nodes-object)
-- [`async blockNumber(options)`](#async-blocknumberoptions)
-- [`async getStorageAt(options, addr, index, blockNumber)`](#async-getstorageatoptions-addr-index-blocknumber)
-- [`getStorageLocation(contract, label)`](#getstoragelocationcontract-label)
-- [`allFunctions(compiledCode)`](#allfunctionscompiledcode)
-- [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
+- [`toHex(number)`](/API.md#tohexnumber)
+- [`fromHex(number)`](/API.md#fromhexnumber)
+- [`encodeFunctionSignature(selector)`](/API.md#web3-eth-abi-functions)
+- [`encodeEventSignature(selector)`](/API.md#web3-eth-abi-functions)
+- [`encodeParameters(typesArray, parameters)`](/API.md#web3-eth-abi-functions)
+- [`encodeFunctionCall(jsonInterface, parameters)`](/API.md#web3-eth-abi-functions)
+- [`decodeParameters(typesArray, parameters)`](/API.md#decodeparameters)
+- [`async call(options, from, to, data, blockNumber)`](/API.md#async-calloptions-from-to-data-blocknumber)
+- [`errors object`](/API.md#errors-object)
+- [`nodes object`](/API.md#nodes-object)
+- [`async blockNumber(options)`](/API.md#async-blocknumberoptions)
+- [`async getStorageAt(options, addr, index, blockNumber)`](/API.md#async-getstorageatoptions-addr-index-blocknumber)
+- [`getStorageLocation(contract, label)`](/API.md#getstoragelocationcontract-label)
+- [`allFunctions(compiledCode)`](/API.md#allfunctionscompiledcode)
+- [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](/API.md#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
 
 ### `options object`
 
@@ -93,6 +94,21 @@ const options = {
   console.log(block);
 })();
 ```
+
+### `fromHex(number)`
+
+`eth-fun` doesn't implement a specific `fromHex(number)` function, but you can
+use `parseInt(number, 16)` that achieves the same results.
+
+```js
+const hexNum = "0xdeadbeef";
+const dec = parseInt(hexNum, 16);
+// 3735928559
+```
+
+#### Notes:
+
+- `toHex` throw errors if `typeof num !== "number"`.
 
 ### `toHex(number)`
 
