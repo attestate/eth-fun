@@ -5,7 +5,13 @@ import getTransactionReceipt from "./getTransactionReceipt.js";
 import { getStorageAt } from "./getStorageAt.js";
 import nodes from "./nodes.js";
 import { RPCError } from "./errors.js";
-import { call, encodeCallSignature, decodeCallOutput } from "./call.js";
+export {
+  call,
+  encodeFunctionSignature,
+  encodeFunctionCall,
+  encodeParameters,
+  decodeParameters,
+} from "./call.js";
 import { toHex } from "./utils.js";
 import getLogs from "./getLogs.js";
 
@@ -18,9 +24,6 @@ export {
   getStorageAt,
   nodes,
   errors,
-  call,
-  encodeCallSignature,
-  decodeCallOutput,
   toHex,
   getBlockByNumber,
   getTransactionReceipt,
