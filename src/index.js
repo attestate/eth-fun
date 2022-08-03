@@ -12,6 +12,14 @@ export {
   encodeParameters,
   decodeParameters,
 } from "./call.js";
+export {
+  concatio,
+  CALLTYPES,
+  flags,
+  testLength,
+  command,
+  io,
+} from "./weirollCall.js";
 import { toHex } from "./utils.js";
 import getLogs from "./getLogs.js";
 

@@ -41,18 +41,24 @@ var __toModule = (module2) => {
 
 // src/index.js
 __export(exports, {
+  CALLTYPES: () => CALLTYPES,
   blockNumber: () => getBlockNo,
   call: () => call,
+  command: () => command,
+  concatio: () => concatio,
   decodeParameters: () => decodeParameters,
   encodeFunctionCall: () => encodeFunctionCall,
   encodeFunctionSignature: () => encodeFunctionSignature,
   encodeParameters: () => encodeParameters,
   errors: () => errors,
+  flags: () => flags,
   getBlockByNumber: () => getBlockByNumber,
   getLogs: () => getLogs,
   getStorageAt: () => getStorageAt,
   getTransactionReceipt: () => getTransactionReceipt,
+  io: () => io,
   nodes: () => nodes_default,
+  testLength: () => testLength,
   toHex: () => toHex
 });
 
@@ -259,6 +265,55 @@ async function call(options, from, to, data, blockNumber = "latest") {
   return await send(options, body);
 }
 
+// src/weirollCall.js
+var CALLTYPES = {
+  STATICCALL: 2
+};
+function testLength(value, lengthBytes) {
+  const maxint = Math.pow(2, 8 * lengthBytes);
+  if (value >= maxint) {
+    throw new Error(`Cannot take input that produces an output > uint${8 * lengthBytes}.MAX_INT. Actual value: ${value}`);
+  }
+}
+function command(sel, f, inp, out, target) {
+  const lengthBytes = 32;
+  const buf = Buffer.concat([sel, f, inp, out, target]);
+  if (buf.length !== lengthBytes) {
+    throw new Error(`Cannot take input that produces an output of more or less than ${lengthBytes} bytes of length. Actual length: ${buf.length}`);
+  }
+  return buf;
+}
+function flags(tup, ext, calltype) {
+  const reserved = 0;
+  const flag = tup + ext + reserved + calltype;
+  const lengthBytes = 1;
+  testLength(flag, lengthBytes);
+  const buf = Buffer.alloc(lengthBytes);
+  buf.writeUInt8(flag);
+  return buf;
+}
+function io(isVariable, idx) {
+  if (typeof isVariable !== "boolean") {
+    throw new Error(`isVariable must be a boolean. Actual Value: ${isVariable}`);
+  }
+  const variability = isVariable ? 128 : 0;
+  const result = variability + idx;
+  const maxint = Math.pow(2, 8);
+  const lengthBytes = 1;
+  testLength(result, lengthBytes);
+  const buf = Buffer.alloc(lengthBytes);
+  buf.writeUInt8(result);
+  return buf;
+}
+function concatio(inputs) {
+  const lengthBytes = 6;
+  const buf = Buffer.concat(inputs);
+  if (buf.length !== lengthBytes) {
+    throw new Error(`Cannot take input that produces an output of more or less than ${lengthBytes} bytes of length. Actual length: ${buf.length}`);
+  }
+  return buf;
+}
+
 // src/getLogs.js
 var { id: id5, jsonrpc: jsonrpc5 } = constants_default;
 async function getLogs(options, { fromBlock, toBlock, address, topics, limit } = {}) {
@@ -282,17 +337,23 @@ var errors = {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  CALLTYPES,
   blockNumber,
   call,
+  command,
+  concatio,
   decodeParameters,
   encodeFunctionCall,
   encodeFunctionSignature,
   encodeParameters,
   errors,
+  flags,
   getBlockByNumber,
   getLogs,
   getStorageAt,
   getTransactionReceipt,
+  io,
   nodes,
+  testLength,
   toHex
 });
