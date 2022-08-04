@@ -8,7 +8,90 @@ import {
   testLength,
   flags,
   CALLTYPES,
+  encodeFunctionCall,
+  call,
+  decodeParameters,
 } from "../src/index.js";
+
+test("produce actual weiroll static call for WETH contract", async (t) => {
+  const sel = Buffer.from("18160ddd", "hex"); // === keccak256("totalSupply()");
+  const f = Buffer.from("02", "hex");
+  const full = Buffer.from("ff", "hex");
+  const inp = Buffer.concat([full, full, full, full, full, full]);
+  const out = io(false, 0b0);
+  const target = Buffer.from("C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "hex"); //WETH
+  const cmd = command(sel, f, inp, out, target);
+
+  const portalAddr = "0x6bb52BE538A1E5668a9c45626EDF2C590e86CA76";
+
+  const options = {
+    url: "https://cloudflare-eth.com",
+  };
+  const to = portalAddr;
+  // NOTE: We set msg.sender to address(0) as this is what the VM Portal
+  // contract expects: `if (msg.sender != caller) revert NotCaller();`
+  const from = "0x0000000000000000000000000000000000000000";
+  const data = encodeFunctionCall(
+    {
+      name: "execute",
+      type: "function",
+      inputs: [
+        {
+          type: "bytes32[]",
+          name: "commands",
+        },
+        {
+          type: "bytes[]",
+          name: "state",
+        },
+      ],
+    },
+    [[`0x${cmd.toString("hex")}`], []]
+  );
+  const output = await call(options, from, to, data);
+  const returns = decodeParameters(["bytes[]"], output);
+});
+
+test.skip("produce actual weiroll call for WETH balanceOf(address)", async (t) => {
+  const sel = Buffer.from("70a08231", "hex"); // === keccak256("balanceOf(address)");
+  const f = Buffer.from("02", "hex");
+  const full = Buffer.from("ff", "hex");
+  const inp = Buffer.concat([io(false, 0), full, full, full, full, full]);
+  const out = io(false, 2);
+  const target = Buffer.from("C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "hex"); //WETH
+  const cmd = command(sel, f, inp, out, target);
+  t.is(cmd.length, 32);
+
+  const payableAmount = 0;
+  const portalAddr = "0x6bb52BE538A1E5668a9c45626EDF2C590e86CA76";
+  const owner = "0xf04a5cc80b1e94c69b48f5ee68a08cd2f09a7c3e";
+
+  const options = {
+    url: "https://cloudflare-eth.com",
+  };
+  const to = portalAddr;
+  const data = encodeFunctionCall(
+    {
+      name: "execute",
+      type: "function",
+      payable: true,
+      inputs: [
+        {
+          type: "bytes32[]",
+          name: "commands",
+        },
+        {
+          type: "bytes[]",
+          name: "state",
+        },
+      ],
+    },
+    [[cmd], [owner]]
+  );
+  console.log(data);
+  const output = await call(options, null, to, data);
+  console.log(output);
+});
 
 test("generating function call to add(uint, uint)", (t) => {
   const sel = Buffer.from("9f313803", "hex"); // === keccak256("add(uint,uint)");
