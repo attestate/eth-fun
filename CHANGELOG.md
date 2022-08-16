@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.9.1
+
+- Add `decodeLog`
+
 ### 0.9.0
 
 - (breaking) Replace `function encodeCallSignature(...)` with `function encodeFunctionCall(...)`
