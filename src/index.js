@@ -11,6 +11,7 @@ export {
   encodeFunctionCall,
   encodeParameters,
   decodeParameters,
+  decodeLog,
 } from "./call.js";
 import { toHex } from "./utils.js";
 import getLogs from "./getLogs.js";

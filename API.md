@@ -11,6 +11,7 @@ Table of contents:
 - [`encodeEventSignature(selector)`](/API.md#web3-eth-abi-functions)
 - [`encodeParameters(typesArray, parameters)`](/API.md#web3-eth-abi-functions)
 - [`encodeFunctionCall(jsonInterface, parameters)`](/API.md#web3-eth-abi-functions)
+- [`decodeLog(inputs, data, topics)`](/API.md#web3-eth-abi-functions)
 - [`decodeParameters(typesArray, parameters)`](/API.md#decodeparameters)
 - [`async call(options, from, to, data, blockNumber)`](/API.md#async-calloptions-from-to-data-blocknumber)
 - [`errors object`](/API.md#errors-object)
@@ -35,8 +36,8 @@ properties:
 ### `web3-eth-abi` functions
 
 The functions `encodeFunctionSignature`, `encodeEventSignature`,
-`encodeParameters`, `encodeFunctionCall`, `decodeParameters` are directly
-imported and exported from
+`encodeParameters`, `encodeFunctionCall`, `decodeParameters`, `decodeLog` are
+directly imported and exported from
 [`web3-eth-abi@1.4.0`](https://web3js.readthedocs.io/en/v1.4.0/web3-eth-abi.html).
 For information on their usage and implementations, refer to the docs of web3.
 

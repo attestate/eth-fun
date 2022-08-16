@@ -72,6 +72,7 @@ Visit [API documentation](/API.md) for a complete list of functions and their ex
 - [`encodeEventSignature(selector)`](/API.md#web3-eth-abi-functions)
 - [`encodeParameters(typesArray, parameters)`](/API.md#web3-eth-abi-functions)
 - [`encodeFunctionCall(jsonInterface, parameters)`](/API.md#web3-eth-abi-functions)
+- [`decodeLog(inputs, data, topics)`](/API.md#web3-eth-abi-functions)
 - [`decodeParameters(typesArray, parameters)`](/API.md#decodeparameters)
 - [`async call(options, from, to, data, blockNumber)`](/API.md#async-calloptions-from-to-data-blocknumber)
 - [`errors object`](/API.md#errors-object)
