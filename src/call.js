@@ -20,6 +20,7 @@ const decodeParameters = (types, output) => {
   return parsedResults;
 };
 const eventFunctionSignature = (...args) => abi.eventFunctionSignature(...args);
+const decodeLog = (...args) => abi.decodeLog(...args);
 
 export {
   encodeFunctionSignature,
@@ -27,6 +28,7 @@ export {
   encodeParameters,
   decodeParameters,
   eventFunctionSignature,
+  decodeLog,
 };
 
 export async function call(options, from, to, data, blockNumber = "latest") {

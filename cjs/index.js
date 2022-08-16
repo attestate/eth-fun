@@ -43,6 +43,7 @@ var __toModule = (module2) => {
 __export(exports, {
   blockNumber: () => getBlockNo,
   call: () => call,
+  decodeLog: () => decodeLog,
   decodeParameters: () => decodeParameters,
   encodeFunctionCall: () => encodeFunctionCall,
   encodeFunctionSignature: () => encodeFunctionSignature,
@@ -239,6 +240,7 @@ var decodeParameters = (types, output) => {
   }
   return parsedResults;
 };
+var decodeLog = (...args) => import_web3_eth_abi.default.decodeLog(...args);
 async function call(options, from, to, data, blockNumber = "latest") {
   const body = {
     method: "eth_call",
@@ -284,6 +286,7 @@ var errors = {
 0 && (module.exports = {
   blockNumber,
   call,
+  decodeLog,
   decodeParameters,
   encodeFunctionCall,
   encodeFunctionSignature,

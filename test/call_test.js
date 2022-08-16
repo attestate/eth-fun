@@ -4,9 +4,44 @@ import esmock from "esmock";
 import fetchMock from "fetch-mock";
 import AbortController from "abort-controller";
 
-import { encodeFunctionCall, decodeParameters } from "../src/call.js";
+import { encodeFunctionCall, decodeParameters } from "../src/index.js";
 import { RPCError } from "../src/errors.js";
 import constants from "../src/constants.js";
+
+test("decoding log", async (t) => {
+  const { decodeLog } = await import("../src/call.js");
+  const data =
+    "0x000000000000000000000000000000000000000000000000000000000000002c000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000000054c7972616800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000054c59524148000000000000000000000000000000000000000000000000000000";
+  // Note: https://web3js.readthedocs.io/en/v1.4.0/web3-eth-abi.html#id22
+  // `topics` must not include the topic0 "if its a non-anonymous event".
+  const topics = [
+    "0x000000000000000000000000ca13eaa6135d719e743ffebb5c26de4ce2f9600c",
+  ];
+  const result = decodeLog(
+    [
+      {
+        type: "uint256",
+        name: "artistId",
+      },
+      {
+        type: "string",
+        name: "name",
+      },
+      {
+        type: "string",
+        name: "symbol",
+      },
+      {
+        type: "address",
+        name: "artistAddress",
+        indexed: true,
+      },
+    ],
+    data,
+    topics
+  );
+  t.is(result.artistAddress, "0xcA13Eaa6135D719e743ffebb5C26de4CE2F9600c");
+});
 
 test("if web3-eth-abi is exported", async (t) => {
   const {
@@ -14,12 +49,14 @@ test("if web3-eth-abi is exported", async (t) => {
     encodeFunctionSignature,
     encodeParameters,
     decodeParameters,
+    decodeLog,
   } = await import("../src/call.js");
   t.is(typeof encodeFunctionCall, "function");
   t.is(typeof encodeFunctionSignature, "function");
   t.is(typeof encodeParameters, "function");
   t.is(typeof decodeParameters, "function");
   t.is(typeof eventFunctionSignature, "function");
+  t.is(typeof decodeLog, "function");
 });
 
 test("eth_call with non-hex block number tag must not return undefined", async (t) => {
