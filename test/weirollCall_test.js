@@ -46,7 +46,7 @@ test("produce actual weiroll static call for WETH contract", async (t) => {
         },
       ],
     },
-    [[`0x${cmd.toString("hex")}`], []]
+    [[`0x${cmd.toString("hex")}`], ['0x0']]
   );
   const output = await call(options, from, to, data);
   const returns = decodeParameters(["bytes[]"], output);
