@@ -13,16 +13,21 @@ import {
   decodeParameters,
 } from "../src/index.js";
 
-test("produce actual weiroll static call for WETH contract", async (t) => {
-  const sel = Buffer.from("18160ddd", "hex"); // === keccak256("totalSupply()");
+test("produce actual weiroll call for WETH contract", async (t) => {
+  const sel = Buffer.from("70a08231", "hex"); // === keccak256("balanceOf(address)");
   const f = Buffer.from("02", "hex");
   const full = Buffer.from("ff", "hex");
-  const inp = Buffer.concat([full, full, full, full, full, full]);
-  const out = io(false, 0b0);
+  const inp = concatio([io(false, 0), full, full, full, full, full]);
+  const out = io(false, 1);
   const target = Buffer.from("C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "hex"); //WETH
   const cmd = command(sel, f, inp, out, target);
 
   const portalAddr = "0x6bb52BE538A1E5668a9c45626EDF2C590e86CA76";
+  // NOTE: Weiroll static state variables length needs to be 32.
+  const owner = `0x${"f04a5cc80b1e94c69b48f5ee68a08cd2f09a7c3e".padStart(
+    32 * 2,
+    "0"
+  )}`; //WETH lending pool
 
   const options = {
     url: "https://cloudflare-eth.com",
@@ -46,51 +51,13 @@ test("produce actual weiroll static call for WETH contract", async (t) => {
         },
       ],
     },
-    [[`0x${cmd.toString("hex")}`], ['0x0']]
+    // NOTE: Weiroll state array needs to be of same length as input + output.
+    [[`0x${cmd.toString("hex")}`], [owner, "0x0"]]
   );
+
   const output = await call(options, from, to, data);
   const returns = decodeParameters(["bytes[]"], output);
-});
-
-test.skip("produce actual weiroll call for WETH balanceOf(address)", async (t) => {
-  const sel = Buffer.from("70a08231", "hex"); // === keccak256("balanceOf(address)");
-  const f = Buffer.from("02", "hex");
-  const full = Buffer.from("ff", "hex");
-  const inp = Buffer.concat([io(false, 0), full, full, full, full, full]);
-  const out = io(false, 2);
-  const target = Buffer.from("C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "hex"); //WETH
-  const cmd = command(sel, f, inp, out, target);
-  t.is(cmd.length, 32);
-
-  const payableAmount = 0;
-  const portalAddr = "0x6bb52BE538A1E5668a9c45626EDF2C590e86CA76";
-  const owner = "0xf04a5cc80b1e94c69b48f5ee68a08cd2f09a7c3e";
-
-  const options = {
-    url: "https://cloudflare-eth.com",
-  };
-  const to = portalAddr;
-  const data = encodeFunctionCall(
-    {
-      name: "execute",
-      type: "function",
-      payable: true,
-      inputs: [
-        {
-          type: "bytes32[]",
-          name: "commands",
-        },
-        {
-          type: "bytes[]",
-          name: "state",
-        },
-      ],
-    },
-    [[cmd], [owner]]
-  );
-  console.log(data);
-  const output = await call(options, null, to, data);
-  console.log(output);
+  t.assert(BigInt(returns[0][1]) / BigInt(10 ** 18) > 0);
 });
 
 test("generating function call to add(uint, uint)", (t) => {
