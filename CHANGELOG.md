@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.9.2
+
+- Add support for [weiroll](https://github.com/weiroll/weiroll)
+
 ### 0.9.1
 
 - Add `decodeLog`
