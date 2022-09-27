@@ -2,25 +2,28 @@
 
 Table of contents:
 
-- [`options object`](/API.md#options-object)
-- [`await getBlockByNumber(options, blockNumber, includeTxBodiesw)`](/API.md#await-getblockbynumberoptions-blocknumber-includetxbodies)
-- [`await getTransactionReceipt(options, txId)`](/API.md#await-gettransactionreceiptoptions-txid)
-- [`toHex(number)`](/API.md#tohexnumber)
-- [`fromHex(number)`](/API.md#fromhexnumber)
-- [`encodeFunctionSignature(selector)`](/API.md#web3-eth-abi-functions)
-- [`encodeEventSignature(selector)`](/API.md#web3-eth-abi-functions)
-- [`encodeParameters(typesArray, parameters)`](/API.md#web3-eth-abi-functions)
-- [`encodeFunctionCall(jsonInterface, parameters)`](/API.md#web3-eth-abi-functions)
-- [`decodeLog(inputs, data, topics)`](/API.md#web3-eth-abi-functions)
-- [`decodeParameters(typesArray, parameters)`](/API.md#decodeparameters)
-- [`async call(options, from, to, data, blockNumber)`](/API.md#async-calloptions-from-to-data-blocknumber)
-- [`errors object`](/API.md#errors-object)
-- [`nodes object`](/API.md#nodes-object)
-- [`async blockNumber(options)`](/API.md#async-blocknumberoptions)
-- [`async getStorageAt(options, addr, index, blockNumber)`](/API.md#async-getstorageatoptions-addr-index-blocknumber)
-- [`getStorageLocation(contract, label)`](/API.md#getstoragelocationcontract-label)
-- [`allFunctions(compiledCode)`](/API.md#allfunctionscompiledcode)
-- [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](/API.md#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
+
+* [`options object`](#options-object)
+* [`web3-eth-abi` functions](#web3-eth-abi-functions)
+    * [`decodeParameters`](#decodeparameters)
+* [`await getTransactionReceipt(options, txId)`](#await-gettransactionreceiptoptions-txid)
+* [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](#await-getblockbynumberoptions-blocknumber-includetxbodies)
+* [`fromHex(number)`](#fromhexnumber)
+* [`toHex(number)`](#tohexnumber)
+* [`async call(options, from, to, data, blockNumber)`](#async-calloptions-from-to-data-blocknumber)
+* [`errors object`](#errors-object)
+* [`nodes object`](#nodes-object)
+* [`async blockNumber(options)`](#async-blocknumberoptions)
+* [`async getStorageAt(options, addr, index, blockNumber)`](#async-getstorageatoptions-addr-index-blocknumber)
+* [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
+* [Weiroll functions](#weiroll-functions)
+    * [`command(sel, f, inp, out, target)`](#commandsel-f-inp-out-target)
+    * [`CALLTYPES`](#calltypes)
+    * [`concatio(inputs)`](#concatioinputs)
+    * [`flags(tup, ext, calltype)`](#flagstup-ext-calltype)
+    * [`testLength(value, lengthBytes)`](#testlengthvalue-lengthbytes)
+    * [`io(isVariable, idx)`](#ioisvariable-idx)
+
 
 ### `options object`
 
@@ -287,3 +290,99 @@ import { getLogs } from "eth-fun";
 #### Notes
 
 - Some Ethereum nodes such as `https://cloudflare-eth.com` only support logs of the latest 128 blocks.
+
+
+### Weiroll functions
+
+The following functions are helpers to build Weiroll commands.
+
+#### `command(sel, f, inp, out, target)`
+
+Constructs a Weiroll command to be sent to a Weiroll VM for execution.
+
+```js
+
+import {
+  concatio,
+  io,
+  command,
+  testLength,
+  flags,
+  CALLTYPES,
+  encodeFunctionCall,
+} from "eth-fun";
+
+
+const sel = Buffer.from("313ce567", "hex"); // === keccak256("decimals()");
+const f = Buffer.from("02", "hex");
+const full = Buffer.from("ff", "hex");
+const inp = Buffer.concat([full, full, full, full, full, full]);
+const out = io(false, 0);
+const target = Buffer.from("C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "hex"); //WETH
+const cmd = command(sel, f, inp, out, target);
+
+// This address should be modified point to an actual Weiroll VM instance:
+const portalAddr = "0x0";
+
+const options = {
+  url: "https://cloudflare-eth.com",
+};
+const to = portalAddr;
+const from = "0x0000000000000000000000000000000000000000";
+const data = encodeFunctionCall(
+{
+  name: "execute",
+  type: "function",
+  inputs: [
+    {
+      type: "bytes32[]",
+      name: "commands",
+    },
+    {
+      type: "bytes[]",
+      name: "state",
+    },
+  ],
+},
+// NOTE: Weiroll state array needs to be of same length as input + output.
+[[`0x${cmd.toString("hex")}`], ["0x0"]]
+);
+
+// const output = await call(options, from, to, data);
+```
+
+
+#### `CALLTYPES`
+
+Structure exposing the supported Weiroll call types.
+
+#### `concatio(inputs)`
+
+Concatenates Weiroll input buffers.
+
+#### `flags(tup, ext, calltype)`
+
+Returns a 1-byte flag argument for a Weiroll command.
+
+See: https://github.com/weiroll/weiroll#flags
+
+#### `testLength(value, lengthBytes)`
+
+Checks that the value has the correct length in bytes.
+
+#### `io(isVariable, idx)`
+
+Returns a 1-byte Weiroll argument specifier.
+
+See: https://github.com/weiroll/weiroll#inputoutput-list-ino-format
+
+#### Notes
+
+Refer to the [Weiroll documentation](https://github.com/weiroll/weiroll) for
+more details.
+
+See `test/weirollCall_test.js` for examples.
+
+Weiroll VM instances can be selfdestructed by any caller, as they make usage of
+delegatecall. For that reason, no public instance is available. You'll probably
+want to deploy your own instance.
