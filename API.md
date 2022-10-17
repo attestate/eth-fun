@@ -102,17 +102,19 @@ const options = {
 ### `fromHex(number)`
 
 `eth-fun` doesn't implement a specific `fromHex(number)` function, but you can
-use `parseInt(number, 16)` that achieves the same results.
+use `BigInt(number)` that achieves the same results. Hexadecimal `number` should
+start with `0x`.
 
 ```js
-const hexNum = "0xdeadbeef";
-const dec = parseInt(hexNum, 16);
-// 3735928559
+const hexNum = "0xdeadbeef2deadbabe2deadc0de";
+const dec = BigInt(hexNum);
+// 17642423810264118620377135825118n
 ```
 
 #### Notes:
 
-- `toHex` throw errors if `typeof num !== "number"`.
+- `BigInt` is preferred instead of `parseInt` because the hexadecimal string
+can be bigger than `Number.MAX_SAFE_INTEGER`.
 
 ### `toHex(number)`
 
