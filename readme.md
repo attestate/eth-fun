@@ -93,11 +93,9 @@ Visit [CHANGELOG.md](/CHANGELOG.md)
 
 ## Contributing
 
-We love contributions from the community. Find a [good first issue](https://github.com/rugpullindex/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+We love contributions from the community. Find a [good first issue](https://github.com/attestate/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
-Want to suggest a feature or even better raise a PR for it? Head over to the [issues](https://github.com/rugpullindex/eth-fun/issues) section or join our [discord](https://discord.gg/zhawZxgKQz).
-
-You can also get paid for a PR. For more information read our [handbook](https://github.com/rugpullindex/documents/blob/master/handbook.md).
+Want to suggest a feature or even better raise a PR for it? Head over to the [issues](https://github.com/attestate/eth-fun/issues).
 
 ## References
 
