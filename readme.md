@@ -1,6 +1,6 @@
 # eth-fun
 
-[![Node.js CI](https://github.com/attestate/eth-fns/actions/workflows/node.js.yml/badge.svg)](https://github.com/attestate/eth-fns/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/attestate/eth-fun/actions/workflows/node.js.yml/badge.svg)](https://github.com/attestate/eth-fun/actions/workflows/node.js.yml)
 
 <p align="center">
   <img src="/assets/eth-fun-logo-light.svg#gh-light-mode-only" />
