@@ -91,9 +91,17 @@ Visit [API documentation](/API.md) for a complete list of functions and their ex
 
 Visit [CHANGELOG.md](/CHANGELOG.md)
 
+## Tests
+
+You can run the library's tests with `npm run test`, however, do make sure that
+you're on node v14 as this is what the esmock setup sadly still depends on.
+Otherwise, for anything but testing, we're using this library in production
+with node v18.
+
 ## Contributing
 
-We love contributions from the community. Find a [good first issue](https://github.com/rugpullindex/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+We love contributions from the community. Find a [good first
+issue](https://github.com/rugpullindex/eth-fun/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 
 Want to suggest a feature or even better raise a PR for it? Head over to the [issues](https://github.com/rugpullindex/eth-fun/issues) section or join our [discord](https://discord.gg/zhawZxgKQz).
 

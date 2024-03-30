@@ -56,6 +56,7 @@ __export(exports, {
   getBlockByNumber: () => getBlockByNumber,
   getLogs: () => getLogs,
   getStorageAt: () => getStorageAt,
+  getTransactionByHash: () => getTransactionByHash,
   getTransactionReceipt: () => getTransactionReceipt,
   io: () => io,
   nodes: () => nodes_default,
@@ -167,6 +168,14 @@ async function getBlockByNumber(options, blockNumber, includeTxBodies) {
 async function getTransactionReceipt(options, txId) {
   return await send(options, __spreadValues({
     method: "eth_getTransactionReceipt",
+    params: [txId]
+  }, constants_default));
+}
+
+// src/getTransactionByHash.js
+async function getTransactionByHash(options, txId) {
+  return await send(options, __spreadValues({
+    method: "eth_getTransactionByHash",
     params: [txId]
   }, constants_default));
 }
@@ -354,6 +363,7 @@ var errors = {
   getBlockByNumber,
   getLogs,
   getStorageAt,
+  getTransactionByHash,
   getTransactionReceipt,
   io,
   nodes,

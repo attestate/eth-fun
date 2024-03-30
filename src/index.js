@@ -2,6 +2,7 @@
 import blockNumber from "./blockNumber.js";
 import getBlockByNumber from "./getBlockByNumber.js";
 import getTransactionReceipt from "./getTransactionReceipt.js";
+import getTransactionByHash from "./getTransactionByHash.js";
 import { getStorageAt } from "./getStorageAt.js";
 import nodes from "./nodes.js";
 import { RPCError } from "./errors.js";
@@ -36,5 +37,6 @@ export {
   toHex,
   getBlockByNumber,
   getTransactionReceipt,
+  getTransactionByHash,
   getLogs,
 };

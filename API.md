@@ -7,6 +7,7 @@ Table of contents:
 * [`web3-eth-abi` functions](#web3-eth-abi-functions)
     * [`decodeParameters`](#decodeparameters)
 * [`await getTransactionReceipt(options, txId)`](#await-gettransactionreceiptoptions-txid)
+* [`await getTransactionByHash(options, txId)`](#await-getransactionbyhashoptions-txid)
 * [`await getBlockByNumber(options, blockNumber, includeTxBodies)`](#await-getblockbynumberoptions-blocknumber-includetxbodies)
 * [`fromHex(number)`](#fromhexnumber)
 * [`toHex(number)`](#tohexnumber)
@@ -74,6 +75,26 @@ const txId =
 
 (async () => {
   const receipt = await getTransactionReceipt(options, txId);
+  console.log(receipt);
+})();
+```
+
+### `await getTransactionByHash(options, txId)`
+
+Returns a transaction given it's `hash` as a hexadecimal value.
+
+```js
+import { getTransactionByHash } from "eth-fun";
+
+const options = {
+  url: "https://cloudflare-eth.com",
+};
+
+const txId =
+  "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238";
+
+(async () => {
+  const receipt = await getTransactionByHash(options, txId);
   console.log(receipt);
 })();
 ```
