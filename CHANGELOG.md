@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.9.3
+
+- Add support for `eth_getTransactionByHash` RPC method
+
 ### 0.9.2
 
 - Add support for [weiroll](https://github.com/weiroll/weiroll)
