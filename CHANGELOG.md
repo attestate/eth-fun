@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.9.4
+
+- Updated Node.js engine requirements to `>=14.0.0 <19.0.0` to align with
+  downstream dependencies
+
 ### 0.9.3
 
 - Add support for `eth_getTransactionByHash` RPC method
