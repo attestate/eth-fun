@@ -140,9 +140,11 @@ test("if eth_call can be aborted by timeout", async (t) => {
   };
   const maxTimeout = 500;
   let timer = setTimeout(() => controller.abort(), maxTimeout);
-  await t.throwsAsync(
-    async () => await call(options, from, to, data, blockNumber)
-  );
+  try {
+    await call(options, from, to, data, blockNumber);
+  } catch (e) {
+    t.true(e instanceof DOMException);
+  }
   clearTimeout(timer);
 });
 

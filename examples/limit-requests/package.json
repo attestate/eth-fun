@@ -10,6 +10,10 @@
   "keywords": [],
   "author": "Rug Pull Index",
   "license": "GPL-3.0-only",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "dependencies": {
     "eth-fun": "^0.5.1",
     "p-limit": "^4.0.0"

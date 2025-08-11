@@ -68,7 +68,11 @@ test.serial("if abort signal is executed", async (t) => {
   };
   const maxTimeout = 500;
   let timer = setTimeout(() => controller.abort(), maxTimeout);
-  await t.throwsAsync(async () => await mockSend(options, body));
+  try {
+    await mockSend(options, body);
+  } catch (e) {
+    t.true(e instanceof DOMException);
+  }
   clearTimeout(timer);
 });
 

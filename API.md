@@ -17,13 +17,7 @@ Table of contents:
 * [`async blockNumber(options)`](#async-blocknumberoptions)
 * [`async getStorageAt(options, addr, index, blockNumber)`](#async-getstorageatoptions-addr-index-blocknumber)
 * [`async getLogs(options, {fromBlock, toBlock, address, topics, limit })`](#async-getlogsoptions-fromblock-toblock-address-topics-limit-)
-* [Weiroll functions](#weiroll-functions)
-    * [`command(sel, f, inp, out, target)`](#commandsel-f-inp-out-target)
-    * [`CALLTYPES`](#calltypes)
-    * [`concatio(inputs)`](#concatioinputs)
-    * [`flags(tup, ext, calltype)`](#flagstup-ext-calltype)
-    * [`testLength(value, lengthBytes)`](#testlengthvalue-lengthbytes)
-    * [`io(isVariable, idx)`](#ioisvariable-idx)
+
 
 
 ### `options object`
@@ -275,12 +269,8 @@ import { getLogs } from "eth-fun";
   };
 
   const output = await getLogs(options, {
-    fromBlock: "0xc60891",
-    toBlock: null,
+    fromBlock: "latest",
     address: "0x8b0acaa0cdc89f0a76acd246177dd75b9614af43",
-    topics: [
-      "0xe1c4fa794edfa8f619b8257a077398950357b9c6398528f94480307352f9afcc",
-    ],
   });
 
   console.log(output);
@@ -315,97 +305,4 @@ import { getLogs } from "eth-fun";
 - Some Ethereum nodes such as `https://cloudflare-eth.com` only support logs of the latest 128 blocks.
 
 
-### Weiroll functions
 
-The following functions are helpers to build Weiroll commands.
-
-#### `command(sel, f, inp, out, target)`
-
-Constructs a Weiroll command to be sent to a Weiroll VM for execution.
-
-```js
-
-import {
-  concatio,
-  io,
-  command,
-  testLength,
-  flags,
-  CALLTYPES,
-  encodeFunctionCall,
-} from "eth-fun";
-
-
-const sel = Buffer.from("313ce567", "hex"); // === keccak256("decimals()");
-const f = Buffer.from("02", "hex");
-const full = Buffer.from("ff", "hex");
-const inp = Buffer.concat([full, full, full, full, full, full]);
-const out = io(false, 0);
-const target = Buffer.from("C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "hex"); //WETH
-const cmd = command(sel, f, inp, out, target);
-
-// This address should be modified point to an actual Weiroll VM instance:
-const portalAddr = "0x0";
-
-const options = {
-  url: "https://cloudflare-eth.com",
-};
-const to = portalAddr;
-const from = "0x0000000000000000000000000000000000000000";
-const data = encodeFunctionCall(
-{
-  name: "execute",
-  type: "function",
-  inputs: [
-    {
-      type: "bytes32[]",
-      name: "commands",
-    },
-    {
-      type: "bytes[]",
-      name: "state",
-    },
-  ],
-},
-// NOTE: Weiroll state array needs to be of same length as input + output.
-[[`0x${cmd.toString("hex")}`], ["0x0"]]
-);
-
-// const output = await call(options, from, to, data);
-```
-
-
-#### `CALLTYPES`
-
-Structure exposing the supported Weiroll call types.
-
-#### `concatio(inputs)`
-
-Concatenates Weiroll input buffers.
-
-#### `flags(tup, ext, calltype)`
-
-Returns a 1-byte flag argument for a Weiroll command.
-
-See: https://github.com/weiroll/weiroll#flags
-
-#### `testLength(value, lengthBytes)`
-
-Checks that the value has the correct length in bytes.
-
-#### `io(isVariable, idx)`
-
-Returns a 1-byte Weiroll argument specifier.
-
-See: https://github.com/weiroll/weiroll#inputoutput-list-ino-format
-
-#### Notes
-
-Refer to the [Weiroll documentation](https://github.com/weiroll/weiroll) for
-more details.
-
-See `test/weirollCall_test.js` for examples.
-
-Weiroll VM instances can be selfdestructed by any caller, as they make usage of
-delegatecall. For that reason, no public instance is available. You'll probably
-want to deploy your own instance.
