@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.10.0
+
+- Support node 20
+- Remove weiroll functionality
+
 ### 0.9.4
 
 - Updated Node.js engine requirements to `>=14.0.0 <19.0.0` to align with
