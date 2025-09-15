@@ -55,6 +55,36 @@ const options = {
 })();
 ```
 
+#### Using with caching (node-fetch-cache)
+
+eth-fun supports custom fetch implementations, which allows you to add caching:
+
+```js
+import { blockNumber, call } from "eth-fun";
+import { fetchBuilder, FileSystemCache } from "node-fetch-cache";
+
+// Create a cached fetch implementation
+const fetch = fetchBuilder.withCache(
+  new FileSystemCache({
+    cacheDirectory: "./cache",
+    ttl: 3600000, // 1 hour
+  })
+);
+
+const options = {
+  url: "https://cloudflare-eth.com",
+  fetch: fetch, // Use the cached fetch
+};
+
+(async () => {
+  // This call will be cached
+  const currentNumber = await blockNumber(options);
+  
+  // Subsequent calls will use the cache
+  const block = await getBlockByNumber(options, currentNumber, false);
+})();
+```
+
 Similar to the above used functions i.e. `blockNumber` and `getBlockByNumber`
 eth-fun implements more utility functions to talk with an Ethereum node using
 [JSON RPC](https://ethereum.org/en/developers/docs/apis/json-rpc/).

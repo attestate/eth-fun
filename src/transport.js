@@ -1,5 +1,5 @@
 //@format
-import fetch from "cross-fetch";
+import defaultFetch from "cross-fetch";
 import { RPCError } from "./errors.js";
 
 export async function send(options, body) {
@@ -14,6 +14,9 @@ export async function send(options, body) {
   } else {
     url = options.url;
   }
+
+  // Use custom fetch if provided, otherwise use default
+  const fetch = options.fetch || defaultFetch;
 
   const res = await fetch(url, {
     method: "POST",

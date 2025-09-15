@@ -93,7 +93,8 @@ async function send(options, body) {
   } else {
     url = options.url;
   }
-  const res = await (0, import_cross_fetch.default)(url, {
+  const fetch2 = options.fetch || import_cross_fetch.default;
+  const res = await fetch2(url, {
     method: "POST",
     headers,
     signal: options.signal,

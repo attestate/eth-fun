@@ -30,6 +30,25 @@ properties:
 | url                                                                               | yes       | `undefined`                            |
 | headers                                                                           | no        | `{"Content-Type": "application/json"}` |
 | [signal](https://developer.mozilla.org/en-US/docs/Web/API/AbortController/signal) | no        | `undefined`                            |
+| fetch                                                                             | no        | `cross-fetch`                          |
+
+The `fetch` option allows you to provide a custom fetch implementation. This is particularly useful for adding caching with libraries like [node-fetch-cache](https://www.npmjs.com/package/node-fetch-cache):
+
+```js
+import { fetchBuilder, FileSystemCache } from "node-fetch-cache";
+
+const fetch = fetchBuilder.withCache(
+  new FileSystemCache({
+    cacheDirectory: "./cache",
+    ttl: 3600000, // 1 hour cache TTL
+  })
+);
+
+const options = {
+  url: "https://cloudflare-eth.com",
+  fetch: fetch, // All RPC calls will be cached
+};
+```
 
 ### `web3-eth-abi` functions
 
