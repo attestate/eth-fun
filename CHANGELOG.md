@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.10.1
+
+- Allow customizable fetch cache option
+
 ### 0.10.0
 
 - Support node 20
