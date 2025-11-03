@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.10.2
+
+- Support Node.js 22+ by removing upper bound on Node version requirement
+
 ### 0.10.1
 
 - Allow customizable fetch cache option
